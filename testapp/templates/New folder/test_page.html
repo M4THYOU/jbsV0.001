@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+{% extends 'base.html' %}
+<head>
+	{% block header %}
+		<meta charset="utf-8">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Contact Opusls with any questions you may have."> <!-- Diff -->
+		<title>
+			Contact | Opusls
+		</title> <!-- Diff -->
+	{% endblock %}
+</head>
+<body>
+{% load staticfiles %}
+{% block content %}
+	<div class="center" id="contact">
+		<h1>test_page h1</h1>
+
+		<p>{{ sample_p }}</p>
+		<h3></h3>
+	</div>
+{% endblock %}
+</body>
+</html>
