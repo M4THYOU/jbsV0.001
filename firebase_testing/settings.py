@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
 
     'testapp.apps.TestappConfig',
+    'serverauth.apps.ServerauthConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

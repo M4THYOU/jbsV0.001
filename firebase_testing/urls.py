@@ -21,4 +21,5 @@ urlpatterns = [
 
     #includes
     path('', include('testapp.urls')),
+    path('api/', include('serverauth.urls'))
 ]
