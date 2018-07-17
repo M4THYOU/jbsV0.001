@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -10,7 +10,9 @@ from serverauth.serializers import RegisteringUserSerializer
 @csrf_exempt
 def post_user(request):
 
-    if request.method == 'POST':
+    if request.method == 'GET':
+        raise Http404('No page found')
+    elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = RegisteringUserSerializer(data=data)
         if serializer.is_valid():
