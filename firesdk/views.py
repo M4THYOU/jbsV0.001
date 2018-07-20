@@ -14,7 +14,7 @@ def show_users(request):
 
     return render(request, 'show_users.html', {'user_list':users})
 
-def get_schedule(request, weeks):
+def get_schedule(request, weeks=1):
     #and now you return all the stuff.
     if request.method == 'GET':
         users = generate_schedule(weeks)
