@@ -14,6 +14,7 @@ google-cloud-firestore==0.29.0
 google-cloud-storage==1.10.0
 google-resumable-media==0.3.1
 googleapis-common-protos==1.5.3
+grpcio==1.13.0
 gunicorn==19.9.0
 idna==2.7
 msgpack==0.5.6
