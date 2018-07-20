@@ -19,6 +19,13 @@ def get_all_users():
     users = []
 
     for doc in documents:
-        users.append(u'{} -> {}'.format(doc.id, doc.to_dict()))
+        users.append(u'{}'.format(doc.to_dict()))
 
     return users
+
+def generate_schedule():
+    user_list = get_all_users()
+
+    #do magic in here to make schedule
+    for user in user_list:
+        pass
