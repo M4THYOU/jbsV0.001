@@ -6,6 +6,6 @@ urlpatterns = [
 
     path('', views.temp_home),
     path('users/', views.show_users),
-    path('schedule/week<int:weeks>/', views.get_schedule)
+    path('schedule/<int:weeks>/', views.get_schedule)
 
 ]
