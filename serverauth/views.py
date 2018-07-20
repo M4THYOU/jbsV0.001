@@ -11,4 +11,4 @@ def post_user(request):
     if request.method == 'GET':
         raise Http404('No page found')
     elif request.method == 'POST':
-
+        pass
