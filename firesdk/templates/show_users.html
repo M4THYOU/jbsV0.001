@@ -5,16 +5,16 @@
 <head>
 	{% block header %}
 		<title>
-			About Us | Opusls
+			Users
 		</title> <!-- Diff -->
 	{% endblock %}
 </head>
 <body>
 {% block content %}
-		<h1>How it Works</h1>
+		<h1>Users</h1>
 		
 		{% for user in user_list %}
-			<p>user</p>
+			<p>{{ user }}</p>
 		{% endfor %}
 		
 {% endblock %}
