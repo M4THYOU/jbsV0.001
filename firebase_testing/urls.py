@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     #includes
+    path('', include('firesdk.urls')),
     path('api/', include('serverauth.urls')),
 ]
