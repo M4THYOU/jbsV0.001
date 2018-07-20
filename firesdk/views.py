@@ -1,6 +1,9 @@
 from django.shortcuts import render
 
+from rest_framework.response import Response
+
 from firesdk.firebaseconn import *
+from firesdk.serializers import UserSerializer
 # Create your views here.
 
 def temp_home(request):
@@ -11,7 +14,10 @@ def show_users(request):
 
     return render(request, 'show_users.html', {'user_list':users})
 
-class EmployeeSchedule:
-    def get(self, request, format=None):
-        #and now you return all the stuff.
-        pass
+def get_schedule(request, weeks):
+    #and now you return all the stuff.
+    if request.method == 'GET':
+        users = generate_schedule(weeks)
+        serializer = UserSerializer(users, many=True).data
+        return Response(serializer)
+
