@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+{% extends 'about-base.html' %}
+{% load staticfiles %}
+<head>
+	{% block header %}
+		<title>
+			About Us | Opusls
+		</title> <!-- Diff -->
+	{% endblock %}
+</head>
+<body>
+{% load verbose_names %}
+{% block content %}
+		<h1>How it Works</h1>
+		
+		{% for user in user_list %}
+			<p>user</p>
+		{% endfor %}
+		
+{% endblock %}
+</body>
+</html>
