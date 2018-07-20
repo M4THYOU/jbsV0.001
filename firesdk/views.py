@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 from firesdk.firebaseconn import *
 from firesdk.serializers import UserSerializer
@@ -14,6 +15,7 @@ def show_users(request):
 
     return render(request, 'show_users.html', {'user_list':users})
 
+@api_view()
 def get_schedule(request, weeks=1):
     #and now you return all the stuff.
     if request.method == 'GET':
