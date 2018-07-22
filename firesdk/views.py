@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
+from rest_framework.renderers import TemplateHTMLRenderer
 
 from firesdk.firebaseconn import *
 from firesdk.serializers import UserSerializer
@@ -17,6 +18,10 @@ def show_users(request):
     return render(request, 'show_users.html', {'user_list':users})
 
 class GetSchedule(APIView):
+
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'coming_soon_base.html'
+
     def get(self, request, weeks=1):
         #and now you return all the stuff.
         if request.method == 'GET':
