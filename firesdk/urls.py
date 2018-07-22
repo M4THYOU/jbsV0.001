@@ -6,6 +6,7 @@ urlpatterns = [
 
     path('', views.temp_home),
     path('users/', views.show_users),
-    path('schedule/<int:weeks>/', views.GetSchedule.as_view())
+    path('schedule/', views.GetSchedule.as_view()),
+    path('schedule/<int:weeks>/', views.GetSchedule.as_view()),
 
 ]
