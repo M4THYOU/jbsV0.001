@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
+from django.views.decorators.csrf import csrf_exempt
 
 from firesdk.firebaseconn import *
 from firesdk.serializers import UserSerializer
