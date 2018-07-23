@@ -19,6 +19,7 @@ def show_users(request):
 
 class GetSchedule(APIView):
 
+    @csrf_exempt
     def get(self, request, weeks=1):
         #and now you return all the stuff.
         if request.method == 'GET':
