@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +25,12 @@ SECRET_KEY = 'd%%5&6bdlh1lqs1m87twc!8w78tpkh)0kewrw&zyw3rt6!@r_)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['firebase-testing-.herokuapp.com']
+school_ip = '10.136.149.29'
+home_ip = '192.168.2.13'
+local_home_ip = '0.0.0.0'
+general_localhost = '127.0.0.1'
+
+ALLOWED_HOSTS = [local_home_ip, home_ip, school_ip, general_localhost]
 
 
 # Application definition
@@ -61,7 +65,7 @@ HEROKU_DIR = os.path.dirname(__file__)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [(os.path.join(BASE_DIR, 'templates')),],
+        'DIRS': [(os.path.join(BASE_DIR, 'templates')), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,15 +129,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-django_heroku.settings(locals())
-
-
-REST_FRAMEWORK = {
-   'DEFAULT_AUTHENTICATION_CLASSES': (
-       'rest_framework.authentication.TokenAuthentication',
-   ),
-   'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAdminUser',
-   ),
-}
