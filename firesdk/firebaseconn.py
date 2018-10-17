@@ -1,9 +1,9 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-from firebase_admin import auth
 
 from firebase_testing import settings
+from utils import Day
 
 import os
 from random import randint
