@@ -12,6 +12,9 @@ urlpatterns = [
     path('schedule/<int:weeks>/', views.GetSchedule.as_view()),
 
     # V2
-    path('avail/set/', views.PostAvailability.as_view()),
+    path('company/', views.Company.as_view()),
+    # path('add/department/'),
+    path('user/', views.User.as_view()),
+    path('avail/', views.Availability.as_view()),
 
 ]

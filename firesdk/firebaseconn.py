@@ -3,7 +3,8 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 
 from firebase_testing import settings
-from utils import Day
+from firesdk.utils import Day
+from .models import CompanyId
 
 import os
 from random import randint
@@ -58,5 +59,39 @@ def generate_schedule(weeks):
     return new_user_list
 
 
-def set_availability(day, start_hour, end_hour):
-    pass
+def get_company_by_name(name):
+    companies_ref = db.collection('companies').where('name', '==', name).limit(1).get()
+
+    for current_company in companies_ref:
+        return db.collection('companies').document(current_company.id)
+
+
+def set_availability(availability_dict, company, department, email):
+    current_company = get_company_by_name(company)
+    department = current_company.collection('departments').document(department)
+
+    user = department.collection('users').document(email)
+    user.update({'availability': availability_dict})
+
+
+def add_user(user_dict, company, department):
+    current_company = get_company_by_name(company)
+
+    department = current_company.collection('departments').document(department)
+    department.collection('users').document(user_dict['email']).set(user_dict)
+
+
+def add_company(company_dict):
+    name = company_dict['name']
+    data = {
+        'name': name
+    }
+
+    new_company = db.collection('companies').document()
+    new_company.set(data)
+
+    CompanyId.objects.create(name=name, company_code=new_company.id)
+
+    for dept in company_dict['departments']:
+        new_dept = new_company.collection('departments').document(dept)
+        new_dept.set({'name': dept})

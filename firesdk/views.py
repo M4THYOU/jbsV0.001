@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from firesdk.firebaseconn import *
 from firesdk.serializers import UserSerializer
+from firesdk.utils import *
+from firesdk.user_classes.UserClass import UserClass
 # Create your views here.
 
 
@@ -17,7 +19,7 @@ def temp_home(request):
 def show_users(request):
     users = get_all_users()
 
-    return render(request, 'show_users.html', {'user_list':users})
+    return render(request, 'show_users.html', {'user_list': users})
 
 
 class GetSchedule(APIView):
@@ -31,18 +33,67 @@ class GetSchedule(APIView):
             return Response(serializer)
 
 
-class PostAvailability(APIView):
+class Company(APIView):
     parser_classes = (JSONParser,)
 
     @csrf_exempt
     def post(self, request):
         data = request.data
-        data_availability = data['availability']
-        availability_monday = data_availability['monday']
 
-        print(data)
-        print(data_availability)
-        print(availability_monday)
+        company_dict = company_to_dict(data['name'], data['departments'])
+        add_company(company_dict)
 
         return Response({'data': data})
 
+
+class User(APIView):
+    parser_classes = (JSONParser,)
+
+    @csrf_exempt
+    def post(self, request):
+        data = request.data
+
+        company = data['company']
+        department = data['department']
+        position = data['position']
+        email = data['email']
+        first_name = data['name']['first']
+        last_name = data['name']['last']
+        is_part_time = data['isPartTime']
+
+        if type(is_part_time) is not bool:
+            raise ValueError("Invalid is_part_time value.")
+
+        user_dict = user_to_dict(position, email, first_name, last_name, is_part_time)
+
+        add_user(user_dict, company, department)
+
+        return Response({'data': data})
+
+
+class Availability(APIView):
+    parser_classes = (JSONParser,)
+
+    @csrf_exempt
+    def post(self, request):
+        data = request.data
+
+        company = data['company']
+        department = data['department']
+        email = data['userEmail']
+
+        sunday = data['sunday']
+        monday = data['monday']
+        tuesday = data['tuesday']
+        wednesday = data['wednesday']
+        thursday = data['thursday']
+        friday = data['friday']
+        saturday = data['saturday']
+
+        availability_days = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+
+        availability_dict = availability_to_dict(availability_days)
+
+        set_availability(availability_dict, company, department, email)
+
+        return Response({'data': data})
