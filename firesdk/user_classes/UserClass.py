@@ -1,7 +1,6 @@
 import datetime
-from random import randint, choice
 
-from firesdk.utils import Day
+from firesdk.util.utils import Day
 
 
 class UserClass:
