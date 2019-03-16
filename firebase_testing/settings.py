@@ -25,7 +25,7 @@ SECRET_KEY = 'd%%5&6bdlh1lqs1m87twc!8w78tpkh)0kewrw&zyw3rt6!@r_)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-school_ip = '10.136.149.29'
+school_ip = '10.136.150.182'
 home_ip = '192.168.2.13'
 local_home_ip = '0.0.0.0'
 general_localhost = '127.0.0.1'
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework'
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -84,10 +84,22 @@ WSGI_APPLICATION = 'firebase_testing.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'hive',
+        'USER': 'matthew',
+        'PASSWORD': '!BW@fc#ib$',
+        'HOST': 'localhost',
+        'PORT': ''
     }
 }
 
