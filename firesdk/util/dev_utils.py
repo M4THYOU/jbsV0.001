@@ -271,6 +271,11 @@ def metrics_to_csv():
 
     with open('jbs-metrics.csv', 'w') as csv_file:
         writer = csv.writer(csv_file, delimiter=',')
+
+        headers = ['Email', 'Company', 'Department', 'Account Type', 'Date', 'Time', 'Timezone', 'Event Type',
+                   'Session Id', 'Other Data']
+        writer.writerow(headers)
+
         for event in all_events:
             email = event.email
             company = event.company

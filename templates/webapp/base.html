@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{% static 'css/webapp/animate.css' %}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{% static 'css/webapp/icomoon.css' %}?a=c">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{% static 'css/webapp/bootstrap.css' %}">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{% static 'css/webapp/magnific-popup.css' %}">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="{% static 'css/webapp/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/webapp/owl.theme.default.min.css' %}">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{% static 'css/webapp/style.css' %}?a=b">
+
+	<!-- Modernizr JS -->
+	<script src="{% static 'js/webapp/modernizr-2.6.2.min.js' %}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="{% static 'js/webapp/respond.min.js' %}"></script>
+	<![endif]-->
+
+    {% block header %}
+    {% endblock %}
+</head>
+<body>
+
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-2">
+							<div id="colorlib-logo"><a href="{% url 'home' %}">Unapp</a></div>
+						</div>
+						<div class="col-md-10 text-right menu-1">
+							<ul>
+								<li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>
+								<li class="has-dropdown {% if request.resolver_match.url_name == 'works' or request.resolver_match.url_name == 'works_grid' or request.resolver_match.url_name == 'works_grid_no_text'%}active{% endif %}">
+									<a href="{% url 'works' %}">Works</a>
+									<ul class="dropdown">
+										<li><a href="{% url 'works_grid' %}">Works grid with text</a></li>
+										<li><a href="{% url 'works_grid_no_text' %}">Works grid w/o text</a></li>
+									</ul>
+								</li>
+								<li class="{% if request.resolver_match.url_name == 'services' %}active{% endif %}"><a href="{% url 'services' %}">Services</a></li>
+								<li class="{% if request.resolver_match.url_name == 'blog' %}active{% endif %}"><a href="{% url 'blog' %}">Blog</a></li>
+								<li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}"><a href="{% url 'about' %}">About</a></li>
+								<li class="{% if request.resolver_match.url_name == 'shop' %}active{% endif %}"><a href="{% url 'shop' %}">Shop</a></li>
+								<li class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}"><a href="{% url 'contact' %}">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+    	{% block content %}
+    	{% endblock %}
+		<footer id="colorlib-footer">
+			<div class="container">
+				<div class="row row-pb-md">
+					<div class="col-md-3 colorlib-widget">
+						<h4>About unapp</h4>
+						<p>Far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
+						<p>
+							<ul class="colorlib-social-icons">
+								<li><a href="#"><i class="icon-twitter"></i></a></li>
+								<li><a href="#"><i class="icon-facebook"></i></a></li>
+								<li><a href="#"><i class="icon-linkedin"></i></a></li>
+								<li><a href="#"><i class="icon-dribbble"></i></a></li>
+							</ul>
+						</p>
+					</div>
+					<div class="col-md-3 colorlib-widget">
+						<h4>Information</h4>
+						<p>
+							<ul class="colorlib-footer-links">
+								<li><a href="#"><i class="icon-check"></i> Home</a></li>
+								<li><a href="#"><i class="icon-check"></i> Gallery</a></li>
+								<li><a href="#"><i class="icon-check"></i> About</a></li>
+								<li><a href="#"><i class="icon-check"></i> Blog</a></li>
+								<li><a href="#"><i class="icon-check"></i> Contact</a></li>
+								<li><a href="#"><i class="icon-check"></i> Privacy</a></li>
+							</ul>
+						</p>
+					</div>
+
+					<div class="col-md-3 colorlib-widget">
+						<h4>Recent Blog</h4>
+						<div class="f-blog">
+							<a href="{% url 'blog' %}" class="blog-img" style="background-image: url({% static 'images/webapp/blog-1.jpg' %});">
+							</a>
+							<div class="desc">
+								<h2><a href="{% url 'blog' %}">Photoshoot Technique</a></h2>
+								<p class="admin"><span>30 March 2018</span></p>
+							</div>
+						</div>
+						<div class="f-blog">
+							<a href="{% url 'blog' %}" class="blog-img" style="background-image: url({% static 'images/webapp/blog-2.jpg' %});">
+							</a>
+							<div class="desc">
+								<h2><a href="{% url 'blog' %}">Camera Lens Shoot</a></h2>
+								<p class="admin"><span>30 March 2018</span></p>
+							</div>
+						</div>
+						<div class="f-blog">
+							<a href="{% url 'blog' %}" class="blog-img" style="background-image: url({% static 'images/webapp/blog-3.jpg' %});">
+							</a>
+							<div class="desc">
+								<h2><a href="{% url 'blog' %}">Imahe the biggest photography studio</a></h2>
+								<p class="admin"><span>30 March 2018</span></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 colorlib-widget">
+						<h4>Contact Info</h4>
+						<ul class="colorlib-footer-links">
+							<li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
+							<li><a href="tel://1234567920"><i class="icon-phone"></i> + 1235 2355 98</a></li>
+							<li><a href="mailto:info@yoursite.com"><i class="icon-envelope"></i> info@yoursite.com</a></li>
+							<li><a href="#"><i class="icon-location4"></i> yourwebsite.com</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="copy">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<p>
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved<br>
+								<a href="https://colorlib.com" target="_blank">Colorlib</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+    </div>
+
+    <div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+	</div>
+
+    <!-- jQuery -->
+	<script src="{% static 'js/webapp/jquery.min.js' %}"></script>
+	<!-- jQuery Easing -->
+	<script src="{% static 'js/webapp/jquery.easing.1.3.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'js/webapp/bootstrap.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'js/webapp/jquery.waypoints.min.js' %}"></script>
+	<!-- Stellar Parallax -->
+	<script src="{% static 'js/webapp/jquery.stellar.min.js' %}"></script>
+	<!-- YTPlayer -->
+	<script src="{% static 'js/webapp/jquery.mb.YTPlayer.min.js' %}"></script>
+	<!-- Owl carousel -->
+	<script src="{% static 'js/webapp/owl.carousel.min.js' %}"></script>
+	<!-- Magnific Popup -->
+	<script src="{% static 'js/webapp/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'js/webapp/magnific-popup-options.js' %}"></script>
+	<!-- Counters -->
+	<script src="{% static 'js/webapp/jquery.countTo.js' %}"></script>
+	<!-- Main -->
+	<script src="{% static 'js/webapp/main.js' %}"></script>
+
+</body>
+</html>

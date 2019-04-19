@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+td.disabled.day,
+td>span.month.disabled,
+td>span.year.disabled,
+td>span.decade.disabled,
+td>span.century.disabled{
+  visibility: hidden;
+}
+
+td.old.day,
+td.new.day {
+    visibility: hidden;
+}
+
+td.working {
+    background-color: #2c99bd;
+
+    border-radius: 25%;
+
+}
+
+td.timeOff {
+    color: grey;
+
+    border-radius: 25%;
+
+}
+

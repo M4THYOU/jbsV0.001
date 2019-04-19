@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+{% extends 'dashboard/empty_base.html' %}
+{% load staticfiles %}
+<head>
+  {% block header %}
+  <title>JBS | The Hive | Login</title>
+
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/utils/red.css' %}">
+
+  {% endblock %}
+</head>
+<body class="hold-transition login-page">
+{% block content %}
+
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>Admin</b>LTE</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body box">
+    <p class="login-box-msg">Sign in to start your session</p>
+
+    <form action="" method="post">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="Comapany Code" value="{{ login_form.company_id.value|default_if_none:'' }}" required name="company_id" maxlength="50" id="id_company_id">
+        <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="Email" value="{{ login_form.email.value|default_if_none:'' }}" required name="email" maxlength="254" id="id_email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password" required name="password" id="id_password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+
+      {% if login_form.errors %}
+        {% for field in login_form %}
+          {% for error in field.errors %}
+            <strong id="form-error" style="color:red">{{ error }}</strong>
+          {% endfor %}
+        {% endfor %}
+      {% endif %}
+
+      {% if login_form.non_field_errors %}
+        {% for error in login_form.non_field_errors %}
+          <strong id="form-error" style="color:red">{{ error }}</strong>
+        {% endfor %}
+      {% endif %}
+
+      {% if login_form.errors or login_form.non_field_errors %}
+      {% else %}
+        <strong id="form-error" style="color:red"></strong>
+      {% endif %}
+
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="button" id="form-button" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+        <button type="submit" id="hidden-button" hidden></button> <!-- User can easily find this hidden button. Make sure it is fail proof on backend. -->
+        <input type="hidden" name="token" id="id_token">
+        <!-- /.col -->
+      </div>
+      {% csrf_token %}
+    </form>
+
+    <a href="#">I forgot my password</a><br>
+    <a href="register.html" class="text-center">Register a new membership</a>
+
+    <!--
+    <div class="overlay">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>-->
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+{% endblock %}
+
+{% block js_scripts %}
+<!-- iCheck -->
+<script src="{% static 'js/dashboard/utils/icheck.min.js' %}"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-red',
+      radioClass: 'iradio_square-red',
+      increaseArea: '20%' /* optional */
+    });
+  });
+</script>
+<script src="{% static 'js/dashboard/base/login.js' %}"></script>
+{% endblock %}
+
+</body>
+</html>

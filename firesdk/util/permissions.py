@@ -1,5 +1,6 @@
 from firesdk.firebase_functions.firebaseconn import *
 from firesdk.models import PermissionBuffer
+from firebase_admin import auth
 
 from enum import Enum
 

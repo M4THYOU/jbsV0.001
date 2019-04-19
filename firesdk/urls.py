@@ -5,8 +5,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 urlpatterns = [
 
-    path('', views.temp_home),
-
     # V1 - NO LONGER IN SERVICE
     # path('users/', views.show_users),
     # path('schedule/', views.GetSchedule.as_view()),

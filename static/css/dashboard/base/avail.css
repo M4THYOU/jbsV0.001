@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.selected-avail-btn {
+    background-color: #e7e7e7;
+    border-color: #adadad;
+
+    box-shadow: 0px 2px 15px #adadad inset;
+
+    z-index: 10;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+tr {
+    vertical-align: center;
+}
+

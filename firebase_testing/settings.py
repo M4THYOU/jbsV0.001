@@ -25,7 +25,7 @@ SECRET_KEY = 'd%%5&6bdlh1lqs1m87twc!8w78tpkh)0kewrw&zyw3rt6!@r_)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-school_ip = '10.136.150.182'
+school_ip = '10.136.149.213'
 home_ip = '192.168.2.13'
 local_home_ip = '0.0.0.0'
 general_localhost = '127.0.0.1'
@@ -38,6 +38,7 @@ ALLOWED_HOSTS = [local_home_ip, home_ip, school_ip, general_localhost]
 INSTALLED_APPS = [
 
     'firesdk.apps.FiresdkConfig',
+    'webapp.apps.WebappConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -84,14 +85,6 @@ WSGI_APPLICATION = 'firebase_testing.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -144,3 +137,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+# The metric tracker uses a different session engine. Look at the check server view thing. This setting makes session_id
+# return as none, thereby throwing an error.
+# Potential solutions:
+# - keep this engine the same but change the method of generating a unique string in CheckServer view
+# - use app specific settings to be able to use a different session engine in each app

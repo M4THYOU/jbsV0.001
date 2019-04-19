@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.bg-custom-blue-gradient {
+    background:#2c99bd !important;
+    background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #2c99bd), color-stop(1, #45b0d3)) !important;
+    background:-ms-linear-gradient(bottom, #2c99bd, #45b0d3) !important;
+    background:-moz-linear-gradient(center bottom, #2c99bd 0, #45b0d3 100%) !important;
+    background:-o-linear-gradient(#45b0d3, #2c99bd) !important;
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#45b0d3', endColorstr='#2c99bd', GradientType=0) !important;
+    color:#fff
+}

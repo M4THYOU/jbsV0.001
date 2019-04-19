@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+{% extends 'dashboard/base.html' %}
+{% load staticfiles %}
+<head>
+  {% block header %}
+
+  <title>JBS | The Hive | Dashboard - Basic</title>
+
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/utils/morris.css' %}">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/jquery/jquery-jvectormap.css' %}">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/bootstrap/bootstrap-datepicker.min.css' %}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/bootstrap/daterangepicker.css' %}">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/bootstrap/bootstrap3-wysihtml5.min.css' %}">
+  <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/bootstrap/bootstrap-timepicker.min.css' %}">
+  <!-- Bootstrap slider -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/bootstrap/slider.css' %}">
+  <!-- Calendar Widget -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/base/calendar.css' %}?a=g">
+  <!-- Availability Widget -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/base/avail.css' %}?a=a">
+
+  {% endblock %}
+</head>
+<body>
+{% block content %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>150</h3>
+
+              <p>Upcoming Shifts</p> <!-- In the next 7 days -->
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+              <p>Bounce Rate</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>44</h3>
+
+              <p>User Registrations</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>65</h3>
+
+              <p>Unique Visitors</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+
+          <!-- TO DO List -->
+          <div class="box box-danger">
+            <div class="box-header">
+              <i class="ion ion-clipboard"></i>
+
+              <h3 class="box-title">Time Off</h3>
+
+              <div class="box-tools pull-right">
+                <ul class="pagination pagination-sm inline">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+              <ul class="todo-list">
+                <li>
+                  <!-- drag handle -->
+                  <span class="handle">
+                        <i class="fa fa-ellipsis-v"></i>
+                        <i class="fa fa-ellipsis-v"></i>
+                      </span>
+                  <!-- checkbox -->
+                  <input type="checkbox" value="">
+                  <!-- todo text -->
+                  <span class="text">Design a nice theme</span>
+                  <!-- Emphasis label -->
+                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+                  <!-- General tools such as edit or delete-->
+                  <div class="tools">
+                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-trash-o"></i>
+                  </div>
+                </li>
+                <li>
+                      <span class="handle">
+                        <i class="fa fa-ellipsis-v"></i>
+                        <i class="fa fa-ellipsis-v"></i>
+                      </span>
+                  <input type="checkbox" value="">
+                  <span class="text">Make the theme responsive</span>
+                  <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
+                  <div class="tools">
+                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-trash-o"></i>
+                  </div>
+                </li>
+                <li>
+                      <span class="handle">
+                        <i class="fa fa-ellipsis-v"></i>
+                        <i class="fa fa-ellipsis-v"></i>
+                      </span>
+                  <input type="checkbox" value="">
+                  <span class="text">Let theme shine like a star</span>
+                  <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
+                  <div class="tools">
+                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-trash-o"></i>
+                  </div>
+                </li>
+                <li>
+                      <span class="handle">
+                        <i class="fa fa-ellipsis-v"></i>
+                        <i class="fa fa-ellipsis-v"></i>
+                      </span>
+                  <input type="checkbox" value="">
+                  <span class="text">Let theme shine like a star</span>
+                  <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
+                  <div class="tools">
+                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-trash-o"></i>
+                  </div>
+                </li>
+                <li>
+                      <span class="handle">
+                        <i class="fa fa-ellipsis-v"></i>
+                        <i class="fa fa-ellipsis-v"></i>
+                      </span>
+                  <input type="checkbox" value="">
+                  <span class="text">Check your messages and notifications</span>
+                  <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
+                  <div class="tools">
+                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-trash-o"></i>
+                  </div>
+                </li>
+                <li>
+                      <span class="handle">
+                        <i class="fa fa-ellipsis-v"></i>
+                        <i class="fa fa-ellipsis-v"></i>
+                      </span>
+                  <input type="checkbox" value="">
+                  <span class="text">Let theme shine like a star</span>
+                  <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
+                  <div class="tools">
+                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-trash-o"></i>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+              <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+            </div>
+          </div>
+          <div class="box box-danger">
+            <div class="box-header">
+              <i class="ion ion-clipboard"></i>
+              <h3 class="box-title">Availability</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table">
+                <tr>
+                  <th>Days</th>
+                  <th></th>
+                  <th style="width: 150px"></th>
+                </tr>
+                <tr id="sunday">
+                  <td>Sunday</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                      <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                      <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+                    </div>
+                  </td>
+                  <td class="time-fields">
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-start" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-end" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="monday">
+                  <td>Monday</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                      <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                      <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+                    </div>
+                  </td>
+                  <td class="time-fields">
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-start" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-end" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="tuesday">
+                  <td>Tuesday</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                      <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                      <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+                    </div>
+                  </td>
+                  <td class="time-fields">
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-start" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-end" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="wednesday">
+                  <td>Wednesday</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                      <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                      <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+                    </div>
+                  </td>
+                  <td class="time-fields">
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-start" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-end" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="thursday">
+                  <td>Thursday</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                      <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                      <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+                    </div>
+                  </td>
+                  <td class="time-fields">
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-start" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-end" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="friday">
+                  <td>Friday</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                      <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                      <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+                    </div>
+                  </td>
+                  <td class="time-fields">
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-start" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-end" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="saturday">
+                  <td>Saturday</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                      <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                      <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+                    </div>
+                  </td>
+                  <td class="time-fields">
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-start" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker-end" disabled>
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Other</th>
+                  <th></th>
+                  <th style="width: 150px"></th>
+                </tr>
+                <tr>
+                  <td>Hours</td>
+                  <td>
+                    <input type="text" value="" class="slider form-control" id="hours-slider" data-slider-min="0"
+                           data-slider-max="84" data-slider-step="1" data-slider-value="[0,0]"
+                           data-slider-orientation="horizontal" data-slider-selection="before"
+                           data-slider-tooltip="hide" data-slider-id="red">
+                  </td>
+                  <td class="badges"><span class="badge bg-green min">0</span> - <span class="badge bg-red max">0</span></td>
+                </tr>
+                <tr>
+                  <td>Shifts</td>
+                  <td>
+                    <input type="text" value="" class="slider form-control" id="shifts-slider" data-slider-min="0"
+                           data-slider-max="7" data-slider-step="1" data-slider-value="[0,0]"
+                           data-slider-orientation="horizontal" data-slider-selection="before"
+                           data-slider-tooltip="hide" data-slider-id="red">
+                  </td>
+                  <td class="badges"><span class="badge bg-green min">0</span> - <span class="badge bg-red max">0</span></td>
+                </tr>
+                <tr>
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+              <button type="button" class="btn btn-default pull-right" disabled id="availability-update-button"><i class="fa fa-upload"></i> Update</button>
+            </div>
+          </div>
+          <!-- /.box -->
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+
+          <!-- Calendar -->
+          <div class="box box-solid bg-red-gradient">
+            <div class="box-header">
+              <i class="fa fa-calendar"></i>
+
+              <h3 class="box-title">Schedule</h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <!-- button with a dropdown -->
+                <div class="btn-group">
+                  <button type="button" class="btn bg-red btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-bars"></i></button>
+                  <ul class="dropdown-menu pull-right" role="menu">
+                    <li><a href="#">Add new event</a></li>
+                    <li><a href="#">Clear events</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">View calendar</a></li>
+                  </ul>
+                </div>
+                <button type="button" class="btn bg-red btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn bg-red btn-sm" data-widget="remove"><i class="fa fa-times"></i>
+                </button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <!--The calendar -->
+              <div id="calendar" style="width: 100%"></div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-black">
+              <div class="row">
+                <div class="col-lg-12 text-center" id="calendar-status">
+                  <p>Select a date for more information.</p>
+                  <p>No date selected</p>
+                </div>
+              </div>
+              <!-- /.row -->
+            </div>
+
+          </div>
+          <!-- /.box -->
+
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+
+{% endblock %}
+
+{% block js_scripts %}
+
+<!-- Morris.js charts -->
+<script src="{% static 'js/dashboard/utils/raphael.min.js' %}"></script>
+<script src="{% static 'js/dashboard/utils/morris.min.js' %}"></script>
+<!-- Sparkline -->
+<script src="{% static 'js/dashboard/jquery/jquery.sparkline.min.js' %}"></script>
+<!-- jvectormap -->
+<script src="{% static 'js/dashboard/jquery/jquery-jvectormap-1.2.2.min.js' %}"></script>
+<script src="{% static 'js/dashboard/jquery/jquery-jvectormap-world-mill-en.js' %}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{% static 'js/dashboard/jquery/jquery.knob.min.js' %}"></script>
+<!-- daterangepicker -->
+<script src="{% static 'js/dashboard/utils/moment.min.js' %}"></script>
+<script src="{% static 'js/dashboard/bootstrap/daterangepicker.js' %}"></script>
+<!-- datepicker -->
+<script src="{% static 'js/dashboard/bootstrap/bootstrap-datepicker.min.js' %}"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="{% static 'js/dashboard/bootstrap/bootstrap3-wysihtml5.all.min.js' %}"></script>
+<!-- Slimscroll -->
+<script src="{% static 'js/dashboard/jquery/jquery.slimscroll.min.js' %}"></script>
+<!-- bootstrap time picker -->
+<script src="{% static 'js/dashboard/bootstrap/bootstrap-timepicker.min.js' %}"></script>
+<!-- bootstrap slider -->
+
+<!-- Calendar Widget -->
+<script src="{% static 'js/dashboard/base/calendar.js' %}?a=c"></script>
+<!-- Availability Widget -->
+<script src="{% static 'js/dashboard/bootstrap/bootstrap-slider.js' %}"></script>
+<script src="{% static 'js/dashboard/base/avail.js' %}?a=e"></script>
+
+{% endblock %}
+</body>
+</html>

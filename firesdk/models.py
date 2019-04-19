@@ -3,6 +3,7 @@ from django.contrib.postgres.fields import *
 
 from datetime import datetime
 import pytz
+import uuid
 
 # Create your models here.
 
@@ -44,7 +45,8 @@ class MetricEvent(Model):
 class PermissionBuffer(Model):
     creation_date = DateTimeField(auto_now_add=True)
 
-    session_id = CharField(max_length=100, verbose_name='Session ID')
+    # session_id = CharField(max_length=100, verbose_name='Session ID')
+    session_id = UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     encoded_email = CharField(max_length=254, verbose_name='Encoded Email', blank=True)
     company = CharField(max_length=300, verbose_name='Company', blank=True)

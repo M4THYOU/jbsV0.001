@@ -21,10 +21,6 @@ from firesdk.util.permissions import Permission, check_perms
 # Create your views here.
 
 
-def temp_home(request):
-    return render(request, 'coming_soon_base.html', {})
-
-
 class CheckServer(APIView):
     """
     Used to check whether or not the server is up.
@@ -34,12 +30,9 @@ class CheckServer(APIView):
     @csrf_exempt
     def get(self, request):
         if request.method == 'GET':
-            print(request.META)
-            request.session.create()
 
-            session_id = request.session.session_key
-
-            PermissionBuffer.objects.create(session_id=session_id)
+            session_id_object = PermissionBuffer.objects.create()
+            session_id = str(session_id_object.pk)
 
             return Response(session_id)
 

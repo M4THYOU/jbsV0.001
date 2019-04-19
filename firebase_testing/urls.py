@@ -18,12 +18,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from firesdk.views import temp_home
+from webapp.views import handler404, handler500
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', temp_home),
 
     # includes
     path('api/', include('firesdk.urls')),
+    path('', include('webapp.urls')),
+    path('hive/', include('dashboard.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+handler404 = handler404
+handler500 = handler500
