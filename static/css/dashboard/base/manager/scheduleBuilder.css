@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#trash-container {
+    text-align: center;
+}
+
+#trash-container i {
+    font-size: 60px;
+
+    -webkit-transition: all 0.1s ease; /* Safari and Chrome */
+  	-moz-transition: all 0.1s ease; /* Firefox */
+  	-o-transition: all 0.1s ease; /* IE 9 */
+  	-ms-transition: all 0.1s ease; /* Opera */
+  	transition: all 0.1s ease;
+}
+
+.hovered-trash i {
+    -webkit-transform:rotate(15deg); /* Safari and Chrome */
+    -moz-transform:rotate(15deg); /* Firefox */
+    -ms-transform:rotate(15deg); /* IE 9 */
+    -o-transform:rotate(15deg); /* Opera */
+    transform:rotate(15deg);
+}

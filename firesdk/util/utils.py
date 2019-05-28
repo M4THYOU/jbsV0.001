@@ -296,3 +296,29 @@ def full_time_off_dict_to_list(full_time_off_dict):
             time_off_list.append(time_off_list_item)
 
     return time_off_list
+
+
+def standard_to_military_time(time_string):
+    split_time = time_string.split(':')
+    hour = int(split_time[0])
+
+    split_minute_time_mode = split_time[1].split(' ')
+    minute = split_minute_time_mode[0]
+    time_mode = split_minute_time_mode[1]
+
+    if time_mode == 'am':
+        if hour == 12:
+            new_hour = 0
+        else:
+            new_hour = hour
+    elif time_mode == 'pm':
+        if hour == 12:
+            new_hour = hour
+        else:
+            new_hour = hour + 12
+    else:
+        return 'Invalid Time Mode: ' + time_mode
+
+    military_time = '{}:{}'.format(new_hour, minute)
+
+    return military_time

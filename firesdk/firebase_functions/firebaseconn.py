@@ -184,7 +184,7 @@ def set_department_schedule(schedule_dict, company, department):
     schedule.set(schedule_dict)
 
 
-def set_all_users_schedule(schedule_dict, company, department):
+def set_all_users_schedule(schedule_dict, company, department, merge=True):
     all_department_basic_users = get_users(company, department)
 
     for user in all_department_basic_users:
@@ -212,10 +212,10 @@ def set_all_users_schedule(schedule_dict, company, department):
             'schedule': schedule
         }
 
-        set_user_schedule(user_schedule, company, email)
+        set_user_schedule(user_schedule, company, email, merge)
 
 
-def set_user_schedule(days_dict, company, email):
+def set_user_schedule(days_dict, company, email, merge):
     """
     days: dictionary of days of the week. Each item is a list of 24 hours working (or not) said day.
     0 = not working, 1 = working
@@ -223,7 +223,7 @@ def set_user_schedule(days_dict, company, email):
     encoded_email = encode_email(email)
 
     schedule = get_user_schedule_ref(company, encoded_email)
-    schedule.set(days_dict, merge=True)
+    schedule.set(days_dict, merge=merge)
 
 
 def set_department_time_off_requests(time_off_dict, company, department, email):
@@ -261,6 +261,31 @@ def set_single_department_time_off_request(time_off_dict, company, department, e
     time_off_ref.set(existing_time_off_dict)
 
 
+def update_single_department_time_off_request_no_reason(time_off_dict, company, department, email):
+    time_off_ref = get_department_time_off_ref(company, department)
+    time_off = time_off_ref.get()
+    existing_time_off_dict = time_off.to_dict()
+
+    updating_date = time_off_dict['date']
+    updating_status = time_off_dict['status']
+
+    if existing_time_off_dict is not None:
+        existing_time_off_dict[email]['statuses'][updating_date] = updating_status
+    else:
+        existing_time_off_dict = {
+            email: {
+                'statuses': {
+                    updating_date: updating_status
+                }
+            }
+        }
+
+    print(existing_time_off_dict)
+    print(updating_date, updating_status)
+
+    time_off_ref.set(existing_time_off_dict, merge=True)
+
+
 def set_user_time_off_requests(time_off_days_dict, company, email):
     encoded_email = encode_email(email)
 
@@ -295,6 +320,28 @@ def set_single_time_off_request(time_off_dict, company, email):
     time_off_ref.set(existing_time_off_dict)
 
 
+def update_single_time_off_request_no_reason(time_off_dict, company, email):
+    encoded_email = encode_email(email)
+
+    time_off_ref = get_user_time_off_ref(company, encoded_email)
+    time_off = time_off_ref.get()
+    existing_time_off_dict = time_off.to_dict()
+
+    updating_date = time_off_dict['date']
+    updating_status = time_off_dict['status']
+
+    if existing_time_off_dict is not None:
+        existing_time_off_dict['statuses'][updating_date] = updating_status
+    else:
+        existing_time_off_dict = {
+            'statuses': {
+                updating_date: updating_status
+            }
+        }
+
+    time_off_ref.set(existing_time_off_dict, merge=True)
+
+
 def add_metric_event(events):
     metrics_ref = db.collection('metrics')
 
@@ -302,6 +349,14 @@ def add_metric_event(events):
         print(event)
         new_event = metrics_ref.document()
         new_event.set(event)
+
+
+def set_department_saved_shifts(shifts_dict, company, department):
+    saved_shifts_ref = get_department_saved_shifts_ref(company, department)
+    # saved_shifts = saved_shifts_ref.get()
+    # saved_shifts_dict = saved_shifts.to_dict()
+
+    saved_shifts_ref.set(shifts_dict)
 
 
 # END POSTING TO DB
@@ -437,6 +492,13 @@ def get_department_schedule_ref(company, department):
     return schedule
 
 
+def get_department_saved_shifts_ref(company, department):
+    current_department = get_department_from_local_db(company, department)
+    saved_shifts = current_department.collection('scheduling').document('saved_shifts')
+
+    return saved_shifts
+
+
 def get_department_time_off_ref(company, department):
     current_department = get_department_from_local_db(company, department)
     time_off = current_department.collection('scheduling').document('time_off')
@@ -522,10 +584,11 @@ def get_login_bools(company, email):
 
 
 def get_needs(company, department):
-    current_department = get_department_from_local_db(company, department).get()
-    department_dict = current_department.to_dict()
+    needs_ref = get_department_needs_ref(company, department)
+    needs = needs_ref.get()
+    needs_dict = needs.to_dict()
 
-    return department_dict
+    return needs_dict
 
 
 def get_full_schedule(company, department):
@@ -550,6 +613,17 @@ def get_user_time_off(company, email):  # assumes email is already encoded
     time_off_dict = time_off.to_dict()
 
     return time_off_dict
+
+
+def get_department_saved_shifts(company, department):
+    saved_shifts_ref = get_department_saved_shifts_ref(company, department)
+    saved_shifts = saved_shifts_ref.get()
+    saved_shifts_dict = saved_shifts.to_dict()
+
+    if saved_shifts_dict is None:
+        return {}
+
+    return saved_shifts_dict
 
 # END GETTING FROM DB
 

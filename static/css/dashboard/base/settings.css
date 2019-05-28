@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.form-group {
+    padding-bottom: 10px;
+}
+
+.error-text-field {
+    border-color: red;
+}
+
+#change-password-error-text {
+    color: red;
+}

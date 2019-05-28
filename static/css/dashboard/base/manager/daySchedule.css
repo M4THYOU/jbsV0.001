@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+#schedule-day-container {
+    float: left;
+    height: 52px;
+}
+
+#day-schedule-day {
+    width: 50px;
+    font-size: 48px;
+
+    margin: 0px;
+}
+
+.todo-list>li {
+    height: 60px;
+    line-height: 60px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+}

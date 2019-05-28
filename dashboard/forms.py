@@ -2,11 +2,13 @@ from django import forms
 from firesdk.firebase_functions.firebaseconn import CompanyId, encode_email, get_user
 from firebase_admin import auth
 
+
 class LoginForm(forms.Form):
     company_id = forms.CharField(max_length=50, required=True)
     email = forms.EmailField(max_length=254, required=True)
     password = forms.CharField(widget=forms.PasswordInput(), required=True)
     token = forms.CharField(widget=forms.HiddenInput())
+    remember_code = forms.BooleanField(required=False)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -32,6 +34,3 @@ class LoginForm(forms.Form):
             raise forms.ValidationError('Invalid Credentials')
 
         return self.cleaned_data
-        # company_id = self.cleaned_data.get('company_id')
-        # company_id = self.cleaned_data.get('company_id')
-        # company_id = self.cleaned_data.get('company_id')

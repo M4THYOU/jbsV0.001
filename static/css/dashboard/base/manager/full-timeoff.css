@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.nav-stacked>li {
+
+}
+
+.text-badge-container {
+    vertical-align: middle;
+}
+
+.buttons-container {
+    text-align: center;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.nav-stacked .label {
+    float: right;
+
+    padding: 5px 13px;
+
+}

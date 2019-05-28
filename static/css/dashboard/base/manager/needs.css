@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+.selected-avail-btn {
+    background-color: #e7e7e7;
+    border-color: #adadad;
+
+    box-shadow: 0px 2px 15px #adadad inset;
+
+    z-index: 10;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+tr {
+    vertical-align: center;
+}
+
+.slider {
+    margin-bottom: 0px !important;
+}
+
+.time-fields, .employee-slider-container, .employees-label-container {
+    display: flex;
+}
+
+.start-time {
+    flex: 0 0 65%;
+    width: 45%;
+}
+
+.end-time {
+    flex: 1;
+    width: 45%;
+}
+
+.employee-slider-container {
+    margin-top: 20px;
+}
+
+.employees-label-container {
+    margin-left: 40px;
+    margin-right: 30px;
+
+
+}
+
+.employee-counter {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.arrow-box {
+    height: 34px;
+    width: 34px;
+}
+
+/* Schedule Builder */
+
+.center-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    height: auto;
+    width: 100%;
+}
+
+#schedule-builder-logo-container {
+    height: 150px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#schedule-builder-logo {
+    -webkit-transition: all 0.1s ease; /* Safari and Chrome */
+  	-moz-transition: all 0.1s ease; /* Firefox */
+  	-o-transition: all 0.1s ease; /* IE 9 */
+  	-ms-transition: all 0.1s ease; /* Opera */
+  	transition: all 0.1s ease;
+}
+
+#schedule-builder-logo:hover {
+    -webkit-transform:scale(1.05); /* Safari and Chrome */
+    -moz-transform:scale(1.05); /* Firefox */
+    -ms-transform:scale(1.05); /* IE 9 */
+    -o-transform:scale(1.05); /* Opera */
+     transform:scale(1.05);
+}
