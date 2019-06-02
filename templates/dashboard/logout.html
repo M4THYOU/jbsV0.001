@@ -5,6 +5,10 @@
 <head>
     {% block header %}
     <title>JBS | The Hive | Sign Out Successful</title>
+
+    <!-- Base -->
+    <link rel="stylesheet" href="{% static 'css/dashboard/custom/base.css' %}">
+
     {% endblock %}
 </head>
 <body class="hold-transition lockscreen">
@@ -12,8 +16,8 @@
 
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
-  <div class="lockscreen-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+  <div class="lockscreen-logo logo-container">
+    <a href="/"><img src="{% static 'images/logos/JBS-red-text.png' %}" height="100%" width="100%"></a>
   </div>
 
   <div class="help-block text-center">

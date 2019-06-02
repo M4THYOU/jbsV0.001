@@ -40,6 +40,8 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="{% static 'css/webapp/style.css' %}?a=b">
+	<!-- Base style  -->
+	<link rel="stylesheet" href="{% static 'css/webapp/base.css' %}?a=b">
 
 	<!-- Modernizr JS -->
 	<script src="{% static 'js/webapp/modernizr-2.6.2.min.js' %}"></script>
@@ -61,11 +63,12 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-2">
-							<div id="colorlib-logo"><a href="{% url 'home' %}">Unapp</a></div>
+							<!--<div id="colorlib-logo"><a href="{% url 'absolute-home' %}">JBS</a></div>-->
+							<div id="colorlib-logo" class="logo-container"><a href="{% url 'absolute-home' %}"><img src="{% static 'images/logos/JBS-white-text.png' %}" height="100%" width="100%"></a></div>
 						</div>
 						<div class="col-md-10 text-right menu-1">
 							<ul>
-								<li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>
+								<li class="{% if request.resolver_match.url_name == 'absolute-home' %}active{% endif %}"><a href="{% url 'absolute-home' %}">Home</a></li>
 								<li class="has-dropdown {% if request.resolver_match.url_name == 'works' or request.resolver_match.url_name == 'works_grid' or request.resolver_match.url_name == 'works_grid_no_text'%}active{% endif %}">
 									<a href="{% url 'works' %}">Works</a>
 									<ul class="dropdown">

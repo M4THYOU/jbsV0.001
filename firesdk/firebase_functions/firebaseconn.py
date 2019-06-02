@@ -293,6 +293,13 @@ def set_user_time_off_requests(time_off_days_dict, company, email):
     time_off.set(time_off_days_dict)
 
 
+def set_user_time_off_requests_merge(time_off_days_dict, company, email):
+    encoded_email = encode_email(email)
+
+    time_off = get_user_time_off_ref(company, encoded_email)
+    time_off.set(time_off_days_dict, merge=True)
+
+
 def set_single_time_off_request(time_off_dict, company, email):
     encoded_email = encode_email(email)
 

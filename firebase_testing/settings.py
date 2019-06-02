@@ -25,7 +25,7 @@ SECRET_KEY = 'd%%5&6bdlh1lqs1m87twc!8w78tpkh)0kewrw&zyw3rt6!@r_)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-school_ip = '10.136.149.250'
+school_ip = '10.136.147.0'
 home_ip = '192.168.2.13'
 local_home_ip = '0.0.0.0'
 general_localhost = '127.0.0.1'

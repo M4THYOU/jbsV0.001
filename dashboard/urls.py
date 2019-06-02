@@ -13,7 +13,7 @@ urlpatterns = [
     path('settings/', views.Settings.as_view(), name='settings'),
 
     # Basic Only
-    # path('availability/', views.Availability.as_view(), name='availability'),
+    path('availability/', views.Availability.as_view(), name='availability-page'),
 
     # Manager Only
     path('needs/', views.Needs.as_view(), name='needs'),
@@ -23,6 +23,8 @@ urlpatterns = [
     # Basic
     path('ajax/schedule-timeoff/', views.schedule_timeoff, name='schedule-timeoff'),
     path('ajax/availability/', views.availability, name='availability'),
+    path('ajax/user-schedule/<str:start_date_string>/<str:end_date_string>/', views.user_schedule, name='user-schedule'),
+    path('ajax/user-time-off/', views.update_user_time_off, name='user-time-off'),
 
     # Manager
     path('ajax/day-schedule/<str:date_string>/', views.day_schedule, name='day-schedule'),

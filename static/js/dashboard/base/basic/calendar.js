@@ -176,6 +176,8 @@ $(function() {
 
                 $calendar.datepicker('update');
 
+                $('#schedule-loading-indicator').remove();
+
             }
         })
 

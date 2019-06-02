@@ -52,8 +52,6 @@ $(function() {
                 'status': newStatus,
             }
 
-            console.log(timeOffData);
-
             var timeOffDataString = JSON.stringify(timeOffData);
             ajaxUpdateAvailability(timeOffDataString);
 
@@ -83,8 +81,6 @@ $(function() {
                 'status': newStatus,
             }
 
-            console.log(timeOffData);
-
             var timeOffDataString = JSON.stringify(timeOffData);
             ajaxUpdateAvailability(timeOffDataString);
 
@@ -101,7 +97,6 @@ $(function() {
             url: "/hive/ajax/full-time-off/" + dateString + "/",
             type: "GET",
             success: function(data) {
-                console.log(data);
 
                 var pastTimeOff = data['past'];
                 var todayTimeOff = data['today'];
@@ -194,6 +189,9 @@ $(function() {
 
                     var date = moment(timeOff['date'], 'DD/MM/YYYY').toDate();
                     var dateString = moment(date).format('MMMM DD, YYYY');
+                    var reason = timeOff['reason'];
+
+                    console.log(reason);
 
                     var statusLabel = '';
                     if (timeOff['status']['pending']) {
@@ -213,6 +211,10 @@ $(function() {
                             '<div class="buttons-container">' +
                                 '<button type="button" class="btn btn-success time-off-approved">Approve</button>' +
                                 '<button type="button" class="btn btn-danger time-off-declined">Decline</button>' +
+                            '</div>' +
+                            '<div>' +
+                                '<b>Reason</b>' +
+                                '<p>' + reason + '</p>' +
                             '</div>' +
                         '</li>'
                     );
@@ -242,14 +244,11 @@ $(function() {
             data: data,
             timeout: 15000,
             success: function(data) {
-                console.log(data);
                 var ogDateString = data['date'];
                 var name = data['name'];
                 var newStatus = data['new_status'];
 
                 var liId = (name + ogDateString).replace(/\//g, '-').replace(/ /g, '-');
-
-                console.log(liId);
 
                 var timeOffRequest = $('.nav-stacked').find('#' + liId);
                 var label = timeOffRequest.find('.label');
@@ -266,11 +265,7 @@ $(function() {
                     label.text('Denied');
                 }
 
-                console.log(timeOffRequest);
                 timeOffRequest.find('.time-off-loading-indicator').remove();
-
-                // update allTimeOffData with new shit.
-                console.log(allTimeOffData[liId]);
 
                 showAlert('Time off approval/declination successful.', true);
             },
@@ -278,16 +273,11 @@ $(function() {
                 showAlert('Error: "' + textStatus + '"', false);
 
                 var $listItems = $('.todo-list').children();
-                console.log('a', $listItems);
                 $listItems.each(function(index, element) {
                     $element = $(this);
 
-                    console.log('c', $element);
-
                     var loadingIndicator = $element.find('.time-off-loading-indicator');
-                    console.log('d', loadingIndicator);
                     if (loadingIndicator.length) {
-                        console.log('e', loadingIndicator);
                         loadingIndicator.remove();
                     }
 

@@ -50,6 +50,7 @@ $(function() {
         day  : 'day'
       },
       editable  : true,
+      eventDurationEditable: false,
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function (currentDate, allDay) { // this function is called when something is dropped
 

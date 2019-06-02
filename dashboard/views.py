@@ -142,14 +142,14 @@ class Home(BaseDashboardView):
         try:
             account_type_int = request.session['account_type']
         except KeyError:
-            return Http404
+            raise Http404
 
         if account_type_int == 0:
             return render(request, 'dashboard/basic/index.html', self.get_base_dict(request))
         elif account_type_int == 1:
             return render(request, 'dashboard/manager/index.html', self.get_base_dict(request))
         else:
-            return Http404
+            raise Http404
 
 
 class Schedule(BaseDashboardView):
@@ -161,14 +161,14 @@ class Schedule(BaseDashboardView):
         try:
             account_type_int = request.session['account_type']
         except KeyError:
-            return Http404
+            raise Http404
 
         if account_type_int == 0:
-            return render(request, 'dashboard/empty_base_extension.html', self.get_base_dict(request))
+            return render(request, 'dashboard/basic/schedule.html', self.get_base_dict(request))
         elif account_type_int == 1:
             return render(request, 'dashboard/manager/schedule.html', self.get_base_dict(request))
         else:
-            return Http404
+            raise Http404
 
 
 class TimeOff(BaseDashboardView):
@@ -180,10 +180,10 @@ class TimeOff(BaseDashboardView):
         try:
             account_type_int = request.session['account_type']
         except KeyError:
-            return Http404
+            raise Http404
 
         if account_type_int == 0:
-            return render(request, 'dashboard/empty_base_extension.html', self.get_base_dict(request))
+            raise Http404
         elif account_type_int == 1:
             try:
                 company_id = request.session['company_id']
@@ -203,7 +203,7 @@ class TimeOff(BaseDashboardView):
             base_dict['department'] = unfilter_org_names(department)
             return render(request, 'dashboard/manager/timeoff.html', base_dict)
         else:
-            return Http404
+            raise Http404
 
 
 class Availability(BaseDashboardView):
@@ -215,14 +215,14 @@ class Availability(BaseDashboardView):
         try:
             account_type_int = request.session['account_type']
         except KeyError:
-            return Http404
+            raise Http404
 
         if account_type_int == 0:
-            return render(request, 'dashboard/empty_base_extension.html', self.get_base_dict(request))
+            return render(request, 'dashboard/basic/availability.html', self.get_base_dict(request))
         elif account_type_int == 1:
-            return Http404
+            raise Http404
         else:
-            return Http404
+            raise Http404
 
 
 class Needs(BaseDashboardView):
@@ -234,10 +234,10 @@ class Needs(BaseDashboardView):
         try:
             account_type_int = request.session['account_type']
         except KeyError:
-            return Http404
+            raise Http404
 
         if account_type_int == 0:
-            return Http404
+            raise Http404
         elif account_type_int == 1:
             try:
                 company_id = request.session['company_id']
@@ -258,7 +258,7 @@ class Needs(BaseDashboardView):
 
             return render(request, 'dashboard/manager/needs.html', base_dict)
         else:
-            return Http404
+            raise Http404
 
 
 class Settings(BaseDashboardView):
@@ -780,3 +780,94 @@ def full_time_off(request, date_string):
     }
 
     return JsonResponse(all_time_off_dict)
+
+
+def user_schedule(request, start_date_string, end_date_string):
+    try:
+        company_id = request.session['company_id']
+    except KeyError:
+        raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING111')
+
+    try:
+        encoded_email = encode_email(request.session['email'])
+    except KeyError:
+        raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING222')
+
+    company = get_company_name_by_company_code(company_id)
+    user = get_user(company, encoded_email)
+
+    account_type = user['account_type']
+    if account_type != 0:
+        raise Http404
+
+    schedule = get_user_schedule(company, encoded_email)
+    exact_times_dict = schedule['exact_times']
+    positions_dict = schedule['positions']
+
+    start_date_string = start_date_string.replace('-', '/')
+    end_date_string = end_date_string.replace('-', '/')
+    start_date = datetime.strptime(start_date_string, '%d/%m/%Y').date()
+    end_date = datetime.strptime(end_date_string, '%d/%m/%Y').date()
+
+    current_exact_times_dict = {}
+    current_positions_dict = {}
+    for working_date, exact_time in exact_times_dict.items():
+        real_date = datetime.strptime(working_date, '%d/%m/%Y').date()
+
+        if start_date <= real_date <= end_date:
+            current_exact_times_dict[working_date] = exact_time
+            current_positions_dict[working_date] = positions_dict[working_date]
+
+    time_off = get_user_time_off(company, encoded_email)
+    reasons_dict = time_off['reasons']
+    statuses_dict = time_off['statuses']
+
+    current_reasons_dict = {}
+    current_statuses_dict = {}
+    for time_off_date, reason in reasons_dict.items():
+        real_date = datetime.strptime(time_off_date, '%d/%m/%Y').date()
+
+        if start_date <= real_date <= end_date:
+            current_reasons_dict[time_off_date] = reason
+            current_statuses_dict[time_off_date] = statuses_dict[time_off_date]
+
+    current_user_schedule_dict = {
+        'exact_times': current_exact_times_dict,
+        'positions': current_positions_dict,
+
+        'time_off_reasons': current_reasons_dict,
+        'time_off_statuses': current_statuses_dict
+    }
+
+    return JsonResponse(current_user_schedule_dict)
+
+
+def update_user_time_off(request):
+    data = {}
+    for key in request.POST.dict().keys():
+        data = json.loads(key)
+
+    try:
+        company_id = request.session['company_id']
+    except KeyError:
+        raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING111')
+
+    try:
+        email = request.session['email']
+        encoded_email = encode_email(email)
+    except KeyError:
+        raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING222')
+
+    company = get_company_name_by_company_code(company_id)
+    user = get_user(company, encoded_email)
+
+    account_type = user['account_type']
+    if account_type != 0:
+        raise Http404
+
+    department = user['primary_department']
+
+    set_user_time_off_requests_merge(data, company, email)  # email NOT encoded
+    set_department_time_off_requests(data, company, department, email)  # merge=true might break it all??
+
+    return HttpResponse('Schedule successfully updated.')

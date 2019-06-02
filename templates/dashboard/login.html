@@ -8,6 +8,8 @@
 
   <!-- iCheck -->
   <link rel="stylesheet" href="{% static 'css/dashboard/utils/red.css' %}">
+  <!-- Base -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/custom/base.css' %}">
 
   {% endblock %}
 </head>
@@ -15,8 +17,8 @@
 {% block content %}
 
 <div class="login-box">
-  <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+  <div class="login-logo logo-container">
+    <a href="/"><img src="{% static 'images/logos/JBS-red-text.png' %}" height="100%" width="100%"></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body box">
@@ -66,7 +68,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="button" id="form-button" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="button" id="form-button" class="btn btn-danger btn-block btn-flat">Sign In</button>
         </div>
         <button type="submit" id="hidden-button" hidden></button> <!-- User can easily find this hidden button. Make sure it is fail proof on backend. -->
         <input type="hidden" name="token" id="id_token">

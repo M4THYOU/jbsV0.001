@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.selected-avail-btn {
+    background-color: #e7e7e7;
+    border-color: #adadad;
+
+    box-shadow: 0px 2px 15px #adadad inset;
+
+    z-index: 10;
+}
+
+.day-avail-box>.box-header>h3 {
+    margin-top: 8px;
+    margin-bottom: auto;
+}
+
+#save-avail-box>.box-body {
+    text-align: center;
+}

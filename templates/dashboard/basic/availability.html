@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+{% extends 'dashboard/basic/base.html' %}
+{% load staticfiles %}
+<head>
+  {% block header %}
+
+  <title>JBS | The Hive | Availability</title>
+
+  <!-- Bootstrap slider -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/bootstrap/slider.css' %}">
+  <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/bootstrap/bootstrap-timepicker.min.css' %}">
+  <!-- Needs -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/base/basic/full-avail.css' %}?a=b">
+
+  {% endblock %}
+</head>
+<body>
+{% block content %}
+
+  <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Availability
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/hive/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Availability</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="box box-default" id="save-avail-box">
+            <div class="box-body">
+              <button class="btn btn-danger" id="availability-update-button" disabled>Save Availability</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="box box-danger day-avail-box" id="sunday">
+            <div class="box-header with-border">
+              <h3 class="box-title">Sunday</h3>
+              <div class="btn-group pull-right btn-avail-group">
+                <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="time-fields">
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-start" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-end" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="overlay" id="sunday-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
+          </div>
+          <div class="box box-danger day-avail-box" id="monday">
+            <div class="box-header with-border">
+              <h3 class="box-title">Monday</h3>
+              <div class="btn-group pull-right btn-avail-group">
+                <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="time-fields">
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-start" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-end" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="overlay" id="monday-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
+          </div>
+          <div class="box box-danger day-avail-box" id="tuesday">
+            <div class="box-header with-border">
+              <h3 class="box-title">Tuesday</h3>
+              <div class="btn-group pull-right btn-avail-group">
+                <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="time-fields">
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-start" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-end" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="overlay" id="tuesday-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
+          </div>
+          <div class="box box-danger day-avail-box" id="wednesday">
+            <div class="box-header with-border">
+              <h3 class="box-title">Wednesday</h3>
+              <div class="btn-group pull-right btn-avail-group">
+                <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="time-fields">
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-start" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-end" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="overlay" id="wednesday-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
+          </div>
+          <div class="box box-danger day-avail-box" id="thursday">
+            <div class="box-header with-border">
+              <h3 class="box-title">Thursday</h3>
+              <div class="btn-group pull-right btn-avail-group">
+                <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="time-fields">
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-start" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-end" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="overlay" id="thursday-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
+          </div>
+          <div class="box box-danger day-avail-box" id="friday">
+            <div class="box-header with-border">
+              <h3 class="box-title">Friday</h3>
+              <div class="btn-group pull-right btn-avail-group">
+                <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="time-fields">
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-start" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-end" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="overlay" id="friday-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
+          </div>
+          <div class="box box-danger day-avail-box" id="saturday">
+            <div class="box-header with-border">
+              <h3 class="box-title">Saturday</h3>
+              <div class="btn-group pull-right btn-avail-group">
+                <button type="button" class="btn btn-default avail-btn" name="open">Open</button>
+                <button type="button" class="btn btn-default avail-btn" name="time">Time</button>
+                <button type="button" class="btn btn-default avail-btn" name="unavailable">Unavailable</button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="time-fields">
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-start" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="form-control timepicker-end" disabled>
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="overlay" id="saturday-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+
+          <div class="box box-danger" id="hours-box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Hours Per Week</h3>
+              <div class="badges pull-right">
+                <span class="badge bg-green min">0</span> - <span class="badge bg-red max">0</span>
+              </div>
+            </div>
+            <div class="box-body">
+              <input type="text" value="" class="slider form-control" id="hours-slider" data-slider-min="0"
+                           data-slider-max="84" data-slider-step="1" data-slider-value="[0,0]"
+                           data-slider-orientation="horizontal" data-slider-selection="before"
+                           data-slider-tooltip="hide" data-slider-id="red">
+            </div>
+
+            <div class="overlay" id="hours-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
+          </div>
+          <div class="box box-danger" id="shifts-box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Shifts Per Week</h3>
+              <div class="badges pull-right">
+                <span class="badge bg-green min">0</span> - <span class="badge bg-red max">0</span>
+              </div>
+            </div>
+            <div class="box-body">
+              <input type="text" value="" class="slider form-control" id="shifts-slider" data-slider-min="0"
+                           data-slider-max="7" data-slider-step="1" data-slider-value="[0,0]"
+                           data-slider-orientation="horizontal" data-slider-selection="before"
+                           data-slider-tooltip="hide" data-slider-id="red">
+            </div>
+
+            <div class="overlay" id="shifts-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+
+{% endblock %}
+
+{% block js_scripts %}
+
+{% csrf_token %}
+<!-- bootstrap slider -->
+<script src="{% static 'js/dashboard/bootstrap/bootstrap-slider.js' %}"></script>
+<!-- bootstrap time picker -->
+<script src="{% static 'js/dashboard/bootstrap/bootstrap-timepicker.min.js' %}"></script>
+<!-- Needs -->
+<script src="{% static 'js/dashboard/base/basic/full-avail.js' %}"></script>
+{% endblock %}
+
+</body>
+</html>

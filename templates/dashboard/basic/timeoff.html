@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+{% extends 'dashboard/basic/base.html' %}
+{% load staticfiles %}
+<head>
+  {% block header %}
+
+  <title>JBS | The Hive | Time Off - Manager</title>
+
+  <!-- Department needs -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/base/manager/full-timeoff.css' %}">
+
+  {% endblock %}
+</head>
+<body>
+{% block content %}
+
+  <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Time Off
+        <small>{{ department }}</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/hive/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Time Off</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="box box-danger" id="past-time-off-box">
+            <div class="box-header">
+              <h3 class="box-title">Past</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                  <i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+              <ul class="nav nav-stacked" id="past-list">
+              </ul>
+            </div>
+
+            <div class="overlay time-off-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box box-danger" id="today-time-off-box">
+            <div class="box-header">
+              <h3 class="box-title">Today</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                  <i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+              <ul class="nav nav-stacked" id="today-list">
+              </ul>
+            </div>
+
+            <div class="overlay time-off-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box box-danger" id="upcoming-time-off-box">
+            <div class="box-header">
+              <h3 class="box-title">Upcoming</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                  <i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+              <ul class="nav nav-stacked" id="upcoming-list">
+              </ul>
+            </div>
+
+            <div class="overlay time-off-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+
+{% endblock %}
+
+{% block js_scripts %}
+
+{% csrf_token %}
+<!-- Moment js -->
+<script src="{% static 'js/dashboard/utils/moment.min.js' %}"></script>
+<!-- Full Time Off -->
+<script src="{% static 'js/dashboard/base/manager/full-timeoff.js' %}?a=e"></script>
+{% endblock %}
+
+</body>
+</html>

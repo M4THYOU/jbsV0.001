@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+{% extends 'dashboard/basic/base.html' %}
+{% load staticfiles %}
+<head>
+  {% block header %}
+
+  <title>JBS | The Hive | Schedule - Basic</title>
+
+  <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/bootstrap/bootstrap-timepicker.min.css' %}">
+  <!-- Full Calendar -->
+  <link rel="stylesheet" href="{% static 'css/dashboard/utils/fullcalendar.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dashboard/utils/fullcalendar.print.min.css' %}" media="print">
+
+  <link rel="stylesheet" href="{% static 'css/dashboard/base/manager/scheduleBuilder.css' %}?a=c">
+
+  {% endblock %}
+</head>
+<body>
+{% block content %}
+
+  <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Schedule and Time Off
+        <small>The Hive</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/hive/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Schedule</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="box box-solid" id="saved-shifts-box">
+            <div class="box-header with-border">
+              <h4 class="box-title">Time Off</h4>
+            </div>
+            <div class="box-body" id="saved-shifts">
+              <!-- the events -->
+              <div id="external-events">
+                <div class="external-event ui-draggable ui-draggable-handle" style="background-color: rgb(243, 156, 18); border-color: rgb(243, 156, 18); color: rgb(255, 255, 255); position: relative;">All Day</div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /. box -->
+          <div class="box box-solid">
+            <div class="box-body">
+
+              <div id="trash-container">
+                <i class="fa fa-trash" id="event-trash"></i>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="box box-danger" id="calendar-box">
+            <div class="box-body no-padding">
+              <!-- THE CALENDAR -->
+              <div id="calendar"></div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <button class="btn btn-default pull-right" id="save-schedule-button">Save Time Off</button>
+            </div>
+
+            <div class="overlay" id="calendar-loading-indicator">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="modal fade" id="modal-user-selector">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Time Off Request</h4>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Reason</label>
+                  <textarea class="form-control" id="reason-field" placeholder="e.g. Vacation..." maxlength="400" rows="4"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="add-time-off-button" disabled>Add Time Off</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+      </div>
+
+    </section>
+    <!-- /.content -->
+
+{% endblock %}
+
+{% block js_scripts %}
+
+{% csrf_token %}
+<script src="{% static 'js/dashboard/jquery/jquery.ui.touch-punch.min.js' %}"></script>
+<!-- bootstrap time picker -->
+<script src="{% static 'js/dashboard/bootstrap/bootstrap-timepicker.min.js' %}"></script>
+<!-- fullCalendar -->
+<script src="{% static 'js/dashboard/utils/moment.min.js' %}"></script>
+<script src="{% static 'js/dashboard/utils/fullcalendar.min.js' %}"></script>
+<!-- Schedule Builder -->
+<script src="{% static 'js/dashboard/base/basic/schedule.js' %}?a=k"></script>
+{% endblock %}
+
+</body>
+</html>

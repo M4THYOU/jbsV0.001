@@ -20,6 +20,34 @@ $(function() {
     var $slider = $('.slider')
     $slider.bootstrapSlider()
 
+    function toggleLoading(turnOn) {
+
+        if (turnOn) {
+            $('#sunday').append('<div class="overlay" id="sunday-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+            $('#monday').append('<div class="overlay" id="monday-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+            $('#tuesday').append('<div class="overlay" id="tuesday-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+            $('#wednesday').append('<div class="overlay" id="wednesday-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+            $('#thursday').append('<div class="overlay" id="thursday-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+            $('#friday').append('<div class="overlay" id="friday-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+            $('#saturday').append('<div class="overlay" id="saturday-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+
+            $('#hours-box').append('<div class="overlay" id="hours-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+            $('#shifts-box').append('<div class="overlay" id="shifts-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+        } else {
+            $('#sunday-loading-indicator').remove();
+            $('#monday-loading-indicator').remove();
+            $('#tuesday-loading-indicator').remove();
+            $('#wednesday-loading-indicator').remove();
+            $('#thursday-loading-indicator').remove();
+            $('#friday-loading-indicator').remove();
+            $('#saturday-loading-indicator').remove();
+
+            $('#hours-loading-indicator').remove();
+            $('#shifts-loading-indicator').remove();
+        }
+
+    }
+
     // change selected availability button
     $('.avail-btn').on('click', function(e) {
         $this = $(this);
@@ -28,8 +56,8 @@ $(function() {
             $this.addClass('selected-avail-btn');
             $this.siblings().removeClass('selected-avail-btn');
 
-            var thisTD = $this.parent().parent();
-            var thisTimeFields = thisTD.siblings('.time-fields');
+            var thisBox = $this.parent().parent().parent();
+            var thisTimeFields = thisBox.find('.time-fields');
 
             var startField = thisTimeFields.find('.timepicker-start');
             var endField = thisTimeFields.find('.timepicker-end');
@@ -127,21 +155,10 @@ $(function() {
 
     }
 
-    // toggles the loading indicator on the availability box
-    function toggleLoading(turnOn) {
-
-        if (turnOn) {
-            $('#avail-box').append('<div class="overlay" id="loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>')
-        } else {
-            $('#loading-indicator').remove()
-        }
-
-    }
-
     // get availability with ajax
     function ajaxGetAvailabilityData() {
         $.ajax({
-            url: "ajax/availability/",
+            url: "/hive/ajax/availability/",
             type: "GET",
             success: function(data) {
                 sunday = data['sunday'];
@@ -204,8 +221,7 @@ $(function() {
                 $('#shifts-slider').bootstrapSlider('setValue', [minShifts, maxShifts], false, true);
 
                 $('#availability-update-button').prop('disabled', false);
-
-                $('#avail-loading-indicator').remove();
+                toggleLoading(false);
 
             }
         })
@@ -229,7 +245,7 @@ $(function() {
             );
         }
 
-        $('#avail-box').append(alertBox).delay(5000).queue(function(next) {
+        $('#save-avail-box').append(alertBox).delay(5000).queue(function(next) {
             $(this).find('.alert').slideUp(500);
             next();
         });
@@ -263,8 +279,8 @@ $(function() {
 
         } else if (selectedButton == 'time') {
 
-            var thisTD = $buttonGroup.parent();
-            var thisTimeFields = thisTD.siblings('.time-fields');
+            var thisBox = $buttonGroup.parent().parent();
+            var thisTimeFields = thisBox.find('.time-fields');
 
             var startField = thisTimeFields.find('.timepicker-start');
             var endField = thisTimeFields.find('.timepicker-end');
@@ -291,6 +307,7 @@ $(function() {
     // when user clicks update button.
     $('#availability-update-button').on('click', function(e) {
 
+        // XXX
         toggleLoading(true);
 
         var sunday = getDayAvailability('sunday');
@@ -309,7 +326,7 @@ $(function() {
         var minShifts = shiftsValues[0];
         var maxShifts = shiftsValues[1];
 
-        availability = {
+        var availability = {
             'sunday': sunday,
             'monday': monday,
             'tuesday': tuesday,
@@ -336,7 +353,7 @@ $(function() {
     // update availability with ajax
     function ajaxUpdateAvailability(data) {
         $.ajax({
-            url: "ajax/availability/",
+            url: "/hive/ajax/availability/",
             type: "POST",
             data: data,
             timeout: 15000,
