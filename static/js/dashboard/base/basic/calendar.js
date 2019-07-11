@@ -153,11 +153,20 @@ $(function() {
                 window.schedule = schedule;
                 window.timeOff = timeOff;
 
-                var schedule_exactTimes = schedule['exact_times'];
-                var schedule_positions = schedule['positions'];
+                var schedule_exactTimes = {};
+                var schedule_positions = {};
+                var timeOff_reasons = {};
+                var timeOff_statuses = {};
 
-                var timeOff_reasons = timeOff['reasons'];
-                var timeOff_statuses = timeOff['statuses'];
+                if (schedule != null) {
+                    schedule_exactTimes = schedule['exact_times'];
+                    schedule_positions = schedule['positions'];
+                }
+
+                if (timeOff != null) {
+                    var timeOff_reasons = timeOff['reasons'];
+                    var timeOff_statuses = timeOff['statuses'];
+                }
 
                 var scheduleDates = [];
                 $.each(schedule_exactTimes, function(date, time) {

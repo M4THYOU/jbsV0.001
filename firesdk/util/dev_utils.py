@@ -9,8 +9,10 @@ import csv
 
 
 def delete_all_users():
-    for user in auth.list_users().iterate_all():
-        auth.delete_user(user.uid)
+    pass
+    # disable this so nobody can use it, for now.
+    # for user in auth.list_users().iterate_all():
+        # auth.delete_user(user.uid)
 
 
 def add_known_user(account_type_int):

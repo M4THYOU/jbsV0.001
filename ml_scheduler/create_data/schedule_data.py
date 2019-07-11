@@ -8,6 +8,7 @@ from operator import itemgetter
 # path_to_schedules = '/Users/matthewwolfe/Documents/JBS/test_data/Schedule JSON/'
 # destination_path = '/Users/matthewwolfe/Documents/JBS/test_data/'
 
+
 def json_schedules_to_csv_by_date(path_to_schedules, destination_path):
     json_schedules = os.listdir(path_to_schedules)
 
@@ -67,8 +68,6 @@ def json_schedules_to_csv_by_date(path_to_schedules, destination_path):
                 except json.decoder.JSONDecodeError:
                     print('Error parsing:', schedule)
                     continue
-
-                print(schedule_data)
 
                 writer.writerow([
                     schedule_data['numberOfUsers'], schedule_data['company'], schedule_data['department'],
@@ -276,7 +275,7 @@ def json_schedules_to_csv_by_shift(path_to_schedules, destination_path):
                         time_24_hr, time_12_hr = start_end_int_to_time(start_int, end_int)
 
                         writer.writerow([
-                            email, day_of_week, time_24_hr, time_12_hr
+                            email, day_of_week, time_24_hr, time_12_hr, schedule
                         ])
 
 

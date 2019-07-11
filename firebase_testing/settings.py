@@ -62,7 +62,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'firebase_testing.urls'
 
-HEROKU_DIR = os.path.dirname(__file__)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -140,8 +139,12 @@ STATICFILES_DIRS = [
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 SESSION_COOKIES_AGE = 60 * 60 * 24 * 30  # one month
-# The metric tracker uses a different session engine. Look at the check server view thing. This setting makes session_id
-# return as none, thereby throwing an error.
-# Potential solutions:
-# - keep this engine the same but change the method of generating a unique string in CheckServer view
-# - use app specific settings to be able to use a different session engine in each app
+
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'jbs.wolfe@gmail.com'
+EMAIL_HOST_PASSWORD = '<He3<:Hh&3z'

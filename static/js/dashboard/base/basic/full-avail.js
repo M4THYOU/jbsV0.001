@@ -183,6 +183,10 @@ $(function() {
 
                     var $buttonGroup = $('#' + day).find('.btn-group');
 
+                    if (availability == null) {
+                        return;
+                    }
+
                     if (availability['is_open']) {
 
                         $buttonGroup.find('button[name="open"]').click();
@@ -212,10 +216,18 @@ $(function() {
                 var hours = data['hours'];
                 var shifts = data['shifts'];
 
-                var minHours = hours['min'];
-                var maxHours = hours['max'];
-                var minShifts = shifts['min'];
-                var maxShifts = shifts['max'];
+                var minHours = 0;
+                var maxHours = 0;
+                var minShifts = 0;
+                var maxShifts = 0;
+                if (hours !== undefined) {
+                    minHours = hours['min'];
+                    maxHours = hours['max'];
+                }
+                if (shifts !== undefined) {
+                    minShifts = shifts['min'];
+                    maxShifts = shifts['max'];
+                }
 
                 $('#hours-slider').bootstrapSlider('setValue', [minHours, maxHours], false, true);
                 $('#shifts-slider').bootstrapSlider('setValue', [minShifts, maxShifts], false, true);

@@ -267,7 +267,17 @@ class Settings(BaseDashboardView):
         if not is_authenticated(request):
             return HttpResponseRedirect('/hive/login/')
 
-        return render(request, 'dashboard/settings.html', self.get_base_dict(request))
+        try:
+            account_type_int = request.session['account_type']
+        except KeyError:
+            raise Http404
+
+        if account_type_int == 0:
+            return render(request, 'dashboard/basic/settings.html', self.get_base_dict(request))
+        elif account_type_int == 1:
+            return render(request, 'dashboard/manager/settings.html', self.get_base_dict(request))
+        else:
+            raise Http404
 
 
 # START ajax #
@@ -331,6 +341,7 @@ def availability(request):
         min_max_shifts = data['shifts']
 
         availability_days = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+        print(availability_days, min_max_hours, min_max_shifts)
         availability_dict = availability_to_dict(availability_days, min_max_hours, min_max_shifts)
 
         set_availability(availability_dict, company, encoded_email)
@@ -359,6 +370,10 @@ def day_schedule(request, date_string):
     department = user['primary_department']
     date_string = date_string.replace('-', '/')
     schedule = get_full_schedule(company, department)
+
+    # Provide default schedule if none exists
+    if not schedule:
+        schedule = {'exactTimes': {}, 'positions': {}}
 
     exact_times_dict = schedule['exactTimes']
     positions_dict = schedule['positions']
@@ -427,6 +442,9 @@ def upcoming_time_off(request, date_string):
         name = user['name']['first'] + ' ' + user['name']['last']
         email_name_key[email] = name
         name_email_key[name] = email
+
+    if not time_off_dict:
+        time_off_dict = {}
 
     time_off_current_dict = defaultdict(list)
     for email, time_off in time_off_dict.items():
@@ -508,6 +526,23 @@ def needs(request):
     if request.method == 'GET':
         department_needs = get_needs(company, department)
 
+        # Provide default needs if they are not set already.
+        if not department_needs:
+            department_needs = {
+                'needs': {
+                    'sunday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    'monday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    'tuesday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    'wednesday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    'thursday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    'friday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    'saturday': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                },
+                'shiftLength': {
+                    'min': 4,
+                    'max': 8
+                }
+            }
         return JsonResponse(department_needs)
 
     elif request.method == 'POST':
@@ -544,6 +579,12 @@ def full_schedule(request, start_date_string, end_date_string):
     department = user['primary_department']
 
     schedule = get_full_schedule(company, department)
+    if not schedule:
+        schedule = {
+            'exactTimes': {},
+            'positions': {}
+        }
+
     exact_times_dict = schedule['exactTimes']
     positions_dict = schedule['positions']
 
@@ -746,6 +787,9 @@ def full_time_off(request, date_string):
         email_name_key[email] = name
         name_email_key[name] = email
 
+    if not time_off_dict:
+        time_off_dict = {}
+
     past = []
     present = []
     future = []
@@ -801,8 +845,12 @@ def user_schedule(request, start_date_string, end_date_string):
         raise Http404
 
     schedule = get_user_schedule(company, encoded_email)
-    exact_times_dict = schedule['exact_times']
-    positions_dict = schedule['positions']
+    if schedule:
+        exact_times_dict = schedule['exact_times']
+        positions_dict = schedule['positions']
+    else:
+        exact_times_dict = {}
+        positions_dict = {}
 
     start_date_string = start_date_string.replace('-', '/')
     end_date_string = end_date_string.replace('-', '/')
@@ -819,8 +867,14 @@ def user_schedule(request, start_date_string, end_date_string):
             current_positions_dict[working_date] = positions_dict[working_date]
 
     time_off = get_user_time_off(company, encoded_email)
-    reasons_dict = time_off['reasons']
-    statuses_dict = time_off['statuses']
+    if not time_off:
+        time_off = {}
+    reasons_dict = {}
+    statuses_dict = {}
+    if 'reasons' in time_off:
+        reasons_dict = time_off['reasons']
+    if 'status' in statuses_dict:
+        statuses_dict = time_off['statuses']
 
     current_reasons_dict = {}
     current_statuses_dict = {}

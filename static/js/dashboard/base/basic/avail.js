@@ -166,28 +166,30 @@ $(function() {
 
                     var $buttonGroup = $('#' + day).find('.btn-group');
 
-                    if (availability['is_open']) {
+                    if (availability !== undefined) {
+                        if (availability['is_open']) {
 
-                        $buttonGroup.find('button[name="open"]').click();
+                            $buttonGroup.find('button[name="open"]').click();
 
-                    } else if (availability['is_unavailable']) {
+                        } else if (availability['is_unavailable']) {
 
-                        $buttonGroup.find('button[name="unavailable"]').click();
+                            $buttonGroup.find('button[name="unavailable"]').click();
 
-                    } else {
+                        } else {
 
-                        $buttonGroup.find('button[name="time"]').click();
+                            $buttonGroup.find('button[name="time"]').click();
 
-                        var startDouble = availability['start'];
-                        var endDouble = availability['end'];
+                            var startDouble = availability['start'];
+                            var endDouble = availability['end'];
 
-                        var startTime = hourDoubleToTime(startDouble);
-                        var endTime = hourDoubleToTime(endDouble);
+                            var startTime = hourDoubleToTime(startDouble);
+                            var endTime = hourDoubleToTime(endDouble);
 
-                        var $timeFields = $('#' + day).find('.time-fields');
-                        var $startField = $timeFields.find('.timepicker-start').val(startTime);
-                        var $endField = $timeFields.find('.timepicker-end').val(endTime);
+                            var $timeFields = $('#' + day).find('.time-fields');
+                            var $startField = $timeFields.find('.timepicker-start').val(startTime);
+                            var $endField = $timeFields.find('.timepicker-end').val(endTime);
 
+                        }
                     }
 
                 })
@@ -195,10 +197,18 @@ $(function() {
                 var hours = data['hours'];
                 var shifts = data['shifts'];
 
-                var minHours = hours['min'];
-                var maxHours = hours['max'];
-                var minShifts = shifts['min'];
-                var maxShifts = shifts['max'];
+                var minHours = 0;
+                var maxHours = 0;
+                var minShifts = 0;
+                var maxShifts = 0;
+                if (hours !== undefined) {
+                    minHours = hours['min'];
+                    maxHours = hours['max'];
+                }
+                if (shifts !== undefined) {
+                    minShifts = shifts['min'];
+                    maxShifts = shifts['max'];
+                }
 
                 $('#hours-slider').bootstrapSlider('setValue', [minHours, maxHours], false, true);
                 $('#shifts-slider').bootstrapSlider('setValue', [minShifts, maxShifts], false, true);
