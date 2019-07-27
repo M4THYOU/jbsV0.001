@@ -322,3 +322,26 @@ def standard_to_military_time(time_string):
     military_time = '{}:{}'.format(new_hour, minute)
 
     return military_time
+
+
+def military_to_standard_time(time_string):
+    split_time = time_string.split(':')
+    hour_int = int(split_time[0])
+    minute_str = split_time[1]
+
+    if hour_int == 0:
+        new_hour = 12
+        suffix = 'am'
+    elif hour_int < 12:
+        new_hour = hour_int
+        suffix = 'am'
+    elif hour_int == 12:
+        new_hour = hour_int
+        suffix = 'pm'
+    else:
+        new_hour = hour_int - 12
+        suffix = 'pm'
+
+    standard_time = '{}:{} {}'.format(new_hour, minute_str, suffix)
+
+    return standard_time

@@ -92,6 +92,8 @@ $(function() {
 
         needsModel[currentDay][hourInt] = newValue.toString();
 
+        mixpanel.track('DASHBOARD | Employee needs slider changed');
+
     });
 
     // handle the SHIFT slider value updating badge
@@ -109,6 +111,8 @@ $(function() {
 
         needsModel['minShiftLength'] = newMinValue.toString();
         needsModel['maxShiftLength'] = newMaxValue.toString();
+
+        mixpanel.track('DASHBOARD | Shift length slider changed');
 
     });
 
@@ -142,6 +146,9 @@ $(function() {
             slider.bootstrapSlider('enable');
 
         }
+
+        mixpanel.track('DASHBOARD | Not open checkbox changed', {'notOpen': this.checked});
+
     })
 
     // handle time change
@@ -172,6 +179,7 @@ $(function() {
 
         slider.bootstrapSlider('setValue', parseInt(currentValueString), false, true);
 
+        mixpanel.track('DASHBOARD | Needs time picker changed');
 
     })
 
@@ -482,6 +490,9 @@ $(function() {
         };
 
         var needsString = JSON.stringify(needs);
+
+        mixpanel.track('DASHBOARD | Needs update Button Click');
+
         ajaxUpdateNeeds(needsString);
 
     })

@@ -280,6 +280,12 @@ class Settings(BaseDashboardView):
             raise Http404
 
 
+class Demo(View):
+
+    def get(self, request):
+        return render(request, 'dashboard/demo/demo.html', {})
+
+
 # START ajax #
 
 def schedule_timeoff(request):
@@ -549,8 +555,6 @@ def needs(request):
         data = {}
         for key in request.POST.dict().keys():
             data = json.loads(key)
-
-        print(data)
 
         needs_dict = data
         set_needs(needs_dict, company, department)
@@ -925,3 +929,22 @@ def update_user_time_off(request):
     set_department_time_off_requests(data, company, department, email)  # merge=true might break it all??
 
     return HttpResponse('Schedule successfully updated.')
+
+
+# DEMO
+def demo_get_saved_shifts(request):
+    saved_shifts = get_demo_saved_shifts()
+
+    return JsonResponse(saved_shifts)
+
+
+def demo_get_user_list(request):
+    user_list = get_demo_user_list()
+
+    return JsonResponse(user_list)
+
+
+def demo_single_schedule(request):
+    schedule = get_demo_single_schedule()
+
+    return JsonResponse(schedule)

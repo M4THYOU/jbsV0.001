@@ -1,5 +1,8 @@
 $(function() {
 
+    // get CSRF token
+    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
     function init_events(ele) {
       ele.each(function () {
 
@@ -28,17 +31,18 @@ $(function() {
      -----------------------------------------------------------------*/
     //Date for the calendar events (dummy data)
     var currentDate = new Date()
-    var startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
-    var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0);
+    var startDate = new Date(2020, 0, 1);
+    var endDate = new Date(2020, 0, 0);
     $('#calendar').fullCalendar({
       dragRevertDuration: 0,
       validRange: {
         start: startDate,
         end: endDate
       },
-      header    : {
-        left  : 'prev,next today',
+      header: {
+        left  : '',
         center: 'title',
+        right : ''
       },
       buttonText: {
         today: 'today',
@@ -49,6 +53,7 @@ $(function() {
       editable  : true,
       eventDurationEditable: false,
       droppable : true, // this allows things to be dropped onto the calendar !!!
+      defaultDate: new Date(2020, 0, 1),
       drop      : function (currentDate, allDay) { // this function is called when something is dropped
 
         $('#modal-user-selector').modal('show');
@@ -57,7 +62,7 @@ $(function() {
         newShift_allDay = allDay;
 
         var dateString = moment(currentDate).format('DD/MM/YYYY');
-        mixpanel.track('SCHEDULE-BUILDER | New shift dropped', {'dateString': dateString});
+        mixpanel.track('DEMO | New shift dropped', {'dateString': dateString});
 
       },
       viewRender: function(view, element) {
@@ -89,7 +94,7 @@ $(function() {
 
             $('#calendar').fullCalendar('removeEvents', [event._id])
 
-            mixpanel.track('SCHEDULE-BUILDER | Shift deleted');
+            mixpanel.track('DEMO | Shift deleted');
 
         }
 
@@ -114,6 +119,7 @@ $(function() {
     $('#add-new-event').click(function (e) {
       e.preventDefault();
       //Get value and make sure it is not null
+
       var startTimeString = $('#timepicker-start').val();
       var endTimeString = $('#timepicker-end').val();
       if (startTimeString.length == 0 || endTimeString.length == 0) {
@@ -122,9 +128,9 @@ $(function() {
 
       var fullTimeString = startTimeString + " - " + endTimeString;
 
-      mixpanel.track('SCHEDULE-BUILDER | Add saved shift Button Click', {'timeString': fullTimeString});
+      mixpanel.track('DEMO | Add saved shift Button Click', {'timeString': fullTimeString});
 
-        var doReturn = false;
+      var doReturn = false;
       $('#external-events').children('.external-event').each(function(i, x) {
         if ($(this).text() == fullTimeString) {
             doReturn = true;
@@ -237,13 +243,12 @@ $(function() {
         }
 
         var dateString = moment(newShift_currentDate).format('DD/MM/YYYY');
-        mixpanel.track('SCHEDULE-BUILDER | New shift add Button Click', {'dateString': dateString});
+        mixpanel.track('DEMO | New shift add Button Click', {'dateString': dateString});
 
         $('#modal-user-selector').modal('hide');
 
         // retrieve the dropped element's stored Event Object
         var originalEventObject = newShift.data('eventObject')
-        console.log(originalEventObject);
         // we need to copy it, so that multiple events don't have a reference to the same object
         var copiedEventObject = $.extend({}, originalEventObject)
 
@@ -300,38 +305,12 @@ $(function() {
 
         $('#saved-shifts-box').append('<div class="overlay" id="saved-shifts-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>')
 
-        var savedShifts = $('#saved-shifts').find('#external-events');
+        mixpanel.track('DEMO | Save shifts Button Click');
 
-        var shiftsDict = {};
-        savedShifts.children().each(function(i, element) {
-            var classes = element.className;
-
-            var backgroundColor = element.style.backgroundColor;
-            var borderColor = element.style.borderColor;
-            var color = element.style.color;
-            var position = element.style.position;
-
-            var timeString = element.textContent;
-
-            var elementDict = {
-                'class': classes,
-
-                'backgroundColor': backgroundColor,
-                'borderColor': borderColor,
-                'color': color,
-                'position': position,
-
-                'time': timeString
-            }
-
-            shiftsDict[i] = elementDict;
-        })
-
-        var shiftsDictString = JSON.stringify(shiftsDict);
-
-        mixpanel.track('SCHEDULE-BUILDER | Save shifts Button Click');
-
-        ajaxUpdateCurrentSavedShifts(shiftsDictString);
+        setTimeout(function() {
+            $('#saved-shifts-loading-indicator').remove();
+            showAlert('Saved shifts successfully updated.', true, 'saved-shifts-box')
+        }, 1000);
 
     })
 
@@ -339,97 +318,95 @@ $(function() {
 
         $('#calendar-box').append('<div class="overlay" id="calendar-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
 
-        var events = $('#calendar').fullCalendar('clientEvents');
+        mixpanel.track('DEMO | Save schedule Button Click');
 
-        var exactTimes = {};
-        var positions = {};
-        $.each(events, function(i, event) {
-            var dateString = event.start.format('DD/MM/YYYY');
-            var timeString = event.title.toLowerCase();
-
-            var tooltip = event.tooltip.split(' | ');
-            var email = nameEmailKey[tooltip[0]];
-            var position = tooltip[1];
-
-            if (exactTimes[dateString] == null) {
-                exactTimes[dateString] = {[email]: timeString};
-            } else {
-                exactTimes[dateString][email] = timeString;
-            }
-
-            if (positions[dateString] == null) {
-                positions[dateString] = {[email]: position};
-            } else {
-                positions[dateString][email] = position;
-            }
-
-        })
-
-        var scheduleDict = {
-            'exactTimes': exactTimes,
-            'positions': positions
-        }
-
-        var scheduleDictString = JSON.stringify(scheduleDict);
-
-        mixpanel.track('SCHEDULE-BUILDER | Save schedule Button Click');
-
-        ajaxUpdateFullSchedule(scheduleDictString);
+        setTimeout(function() {
+            $('#calendar-loading-indicator').remove();
+            $('#modal-demo-done').modal('show');
+        }, 1000);
 
     })
 
-    // get schedule with ajax
-    function ajaxGetFullSchedule(startDate, endDate) {
-        var startDateString = moment(startDate).format('DD-MM-YYYY');
-        var endDateString = moment(endDate).format('DD-MM-YYYY');
-        $.ajax({
-            url: "/hive/ajax/full-schedule/" + startDateString + "/" + endDateString + "/",
-            type: "GET",
-            success: function(data) {
-                emailNameKey = data['email_name_key'];
-                nameEmailKey = data['name_email_key'];
-                setUserList(emailNameKey);
+//////////////////////////////////////////////////////////////////
+    $emailField = $('#email');
 
-                var exactTimes = data['exact_times'];
-                var positions = data['positions'];
+    function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
 
-                $.each(exactTimes, function(dateString, workingUsersDict) {
-                    $.each(emailNameKey, function(email, name) {
-                        if (email in workingUsersDict) {
+    function validateEmailField(email) {
+        var isValid = true;
 
-                            var timeString = workingUsersDict[email].toUpperCase();
-                            var position = positions[dateString][email];
-                            var name = emailNameKey[email];
-                            var date = moment(dateString, 'DD/MM/YYYY').toDate();
+        if (email == "") {
+            isValid = false;
+            $emailField.css('border-color', 'red');
+        } else if (!validateEmail(email)) {
+            isValid = false;
+            $emailField.css('border-color', 'red');
+        } else {
+            $emailField.css('border-color', '');
+        }
 
-                            addNewShift(date, name, position, timeString);
-
-                        }
-                    })
-                })
-
-                $('#calendar-loading-indicator').remove();
-
-            }
-        })
+        // I am not checking whether it is a valid email or not. Business decision. Let them give us whatever data they want.
+        return isValid;
 
     }
 
-    function ajaxUpdateFullSchedule(data) {
+    $emailField.on('input', function(e) {
+        validateEmailField($emailField.val().trim());
+    })
+
+    $('#demo-button').on('click', function(e) {
+        emailText = $emailField.val().trim();
+
+        isValid = validateEmailField(emailText);
+
+        if (isValid) {
+            postEmail(emailText);
+            mixpanel.track('DEMO | Valid demo complete submit email Button Click', {'email': emailText});
+        } else {
+            mixpanel.track('DEMO | Invalid demo complete submit email Button Click', {'email': emailText});
+        }
+    })
+
+    function toggleLoading(isNowLoading) {
+
+        if (isNowLoading) {
+            $('#modal-demo-done').append('<div class="overlay" id="email-submit-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+            $emailField.prop('disabled', true);
+            $('#demo-button').prop('disabled', true);
+        } else {
+            $('#email-submit-loading-indicator').remove();
+            $emailField.prop('disabled', false);
+            $('#demo-button').prop('disabled', false);
+        }
+
+    }
+
+    function showEmailSuccess(message) {
+        formContainer = $('#email-submit-body');
+        //formContainer.css('display', 'inline-block');
+        formContainer.html('<h4 id="modal-subtitle"><b>' + message + '</b></h4>');
+    }
+
+    // update availability with ajax
+    function postEmail(email) {
+        toggleLoading(true);
+
         $.ajax({
-            url: "/hive/ajax/full-schedule/",
+            url: "/ajax/submit-email/",
             type: "POST",
+            data: {'email': email},
             timeout: 15000,
-            data: data,
             success: function(data) {
-                console.log(data);
-                $('#calendar-loading-indicator').remove();
-                showAlert(data, true, 'calendar-box')
+                toggleLoading(false);
+                var message = data + ' <a href="/about-hive/" id="learn-more">Learn More</a>'
+                showEmailSuccess(message);
+                createOnClick();
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-                $('#calendar-loading-indicator').remove();
-                showAlert('Error: "' + textStatus + '"', false, 'calendar-box');
+                toggleLoading(false);
             },
             beforeSend: function(xhr, settings) {
                 if (!this.crossDomain) {
@@ -438,10 +415,28 @@ $(function() {
             }
         })
     }
+//////////////////////////////////////////////////////////////////
+
+    // get schedule with ajax
+    function ajaxGetUserList() {
+        $.ajax({
+            url: "/hive/ajax/demo/users/",
+            type: "GET",
+            success: function(data) {
+                emailNameKey = data['email_name_key'];
+                nameEmailKey = data['name_email_key'];
+                setUserList(emailNameKey);
+
+                $('#calendar-loading-indicator').remove();
+
+            }
+        })
+
+    }
 
     function ajaxGetCurrentSavedShifts() {
         $.ajax({
-            url: "/hive/ajax/saved-shifts/",
+            url: "/hive/ajax/demo/shifts/",
             type: "GET",
             success: function(data) {
                 var shiftsList = data['shifts'];
@@ -488,29 +483,38 @@ $(function() {
         })
     }
 
-    function ajaxUpdateCurrentSavedShifts(data) {
+    // get schedule with ajax
+    function ajaxGetAutoSchedule(dateList) {
         $.ajax({
-            url: "/hive/ajax/saved-shifts/",
-            type: "POST",
-            timeout: 15000,
-            data: data,
+            url: "/hive/ajax/demo/schedule/",
+            type: "GET",
             success: function(data) {
-                $('#saved-shifts-loading-indicator').remove();
-                showAlert(data, true, 'saved-shifts-box')
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                $('#saved-shifts-loading-indicator').remove();
-                showAlert('Error: "' + textStatus + '"', false, 'saved-shifts-box');
-            },
-            beforeSend: function(xhr, settings) {
-                if (!this.crossDomain) {
-                    xhr.setRequestHeader('X-CSRFToken', csrfToken);
-                }
+                console.log(data);
+
+                var exactTimes = data['exactTimes'];
+                var positions = data['positions'];
+
+                dateList.forEach(function(dateString, index) {
+                    var currentExactTimes = exactTimes[dateString];
+                    var currentPositions = positions[dateString];
+
+                    $.each(emailNameKey, function(email, name) {
+                        if (email in currentExactTimes) {
+                            var timeString = currentExactTimes[email].toUpperCase();
+                            var position = currentPositions[email];
+                            var date = moment(dateString, 'DD/MM/YYYY').toDate()
+
+                            addNewShift(date, name, position, timeString);
+                        }
+                    })
+                })
+
             }
         })
+
     }
 
-    ajaxGetFullSchedule(startDate, endDate);
+    ajaxGetUserList()
     ajaxGetCurrentSavedShifts();
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -529,7 +533,7 @@ $(function() {
             var startRowDate = moment(firstOfRowDate, 'YYYY-MM-DD');
             var startOfWeek = moment().startOf('week');
             if (startRowDate >= startOfWeek && !lastOfRowDisabled) {
-                $(this).prepend('<button class="auto-button"></button>');
+                $(this).prepend('<button class="auto-button">AI</button>');
             }
 
         })
@@ -550,10 +554,29 @@ $(function() {
             weekDays.push(formattedDateString);
         })
 
-        console.log(weekDays);
+        $('#calendar').fullCalendar('removeEvents', function(e) {
+            var eventDate = e.start.add(1, 'd').toDate();
+            var eventDateString = moment(eventDate).format('DD/MM/YYYY');
 
-        mixpanel.track('SCHEDULE-BUILDER | AI Button Click');
+            if (weekDays.includes(eventDateString)) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+
+        ajaxGetAutoSchedule(weekDays);
+
+        mixpanel.track('DEMO | AI Button Click');
 
     })
+
+// Metric Tracking with MixPanel ///////////////////////////////////////////////////////////////////////////////////////
+
+    function createOnClick() {
+        $('#learn-more').on('click', function() {
+            mixpanel.track('DEMO | Demo complete learn more Button Click');
+        })
+    }
 
 })

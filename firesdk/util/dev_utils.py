@@ -1,11 +1,12 @@
 from firesdk.firebase_functions.basefirebase import *
 from firesdk.user_classes.users import XLSUser
 from .utils import user_to_dict, org_names_filter, encode_email
-from firesdk.firebase_functions.firebaseconn import add_user, set_availability
+from firesdk.firebase_functions.firebaseconn import add_user, set_availability, get_demo_schedules_ref, get_demo_user_list
 
 from firesdk.models import MetricEvent
 
 import csv
+from random import randint
 
 
 def delete_all_users():
@@ -295,3 +296,42 @@ def metrics_to_csv():
 
             writer.writerow(row)
 
+
+def generate_demo_data():
+    demo_schedules = get_demo_schedules_ref()
+
+    date_keys = [
+        '29/12/2019', '30/12/2019', '31/12/2019', '01/01/2020', '02/01/2020', '03/01/2020', '04/01/2020', '05/01/2020',
+        '06/01/2020', '07/01/2020', '08/01/2020', '09/01/2020', '10/01/2020', '11/01/2020', '12/01/2020', '13/01/2020',
+        '14/01/2020', '15/01/2020', '16/01/2020', '17/01/2020', '18/01/2020', '19/01/2020', '20/01/2020', '21/01/2020',
+        '22/01/2020', '23/01/2020', '24/01/2020', '25/01/2020', '26/01/2020', '27/01/2020', '28/01/2020', '29/01/2020',
+        '30/01/2020', '31/01/2020', '01/02/2020', '02/02/2020', '03/02/2020', '04/02/2020', '05/02/2020', '06/02/2020',
+        '07/02/2020', '08/02/2020'
+    ]
+
+    user_list = get_demo_user_list()
+    email_list = list(user_list['email_name_key'])
+    positions = ['Developer', 'Cashier', 'Sales Rep', 'Cook', 'Waiter', 'Janitor', 'Window Cleaner', 'Baker']
+    shift_times = ['9:00 am - 5:00 pm', '9:00 am - 1:00 pm', '1:00 pm - 5:00 pm', '4:00 pm - 8:00 pm']
+
+    actual_schedules = {}
+    for key in demo_schedules.keys():
+        demo_schedule = {'exactTimes': {}, 'positions': {}}
+        for date_string in date_keys:
+            demo_schedule['exactTimes'][date_string] = {}
+            demo_schedule['positions'][date_string] = {}
+
+            # 1-3 users per day
+            for _ in range(0, randint(1, 4)):
+                email = email_list[randint(0, len(email_list) - 1)]
+                position = positions[randint(0, len(positions) - 1)]
+                time = shift_times[randint(0, len(shift_times) - 1)]
+
+                demo_schedule['exactTimes'][date_string][email] = time
+                demo_schedule['positions'][date_string][email] = position
+
+        actual_schedules[key] = demo_schedule
+
+    demo_schedules['a'].set(actual_schedules['a'])
+    demo_schedules['b'].set(actual_schedules['b'])
+    demo_schedules['c'].set(actual_schedules['c'])

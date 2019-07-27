@@ -59,6 +59,9 @@ $(function() {
             }
 
             var timeOffDataString = JSON.stringify(timeOffData);
+
+            mixpanel.track('DASHBOARD | Time off approve Button Click');
+
             ajaxUpdateAvailability(timeOffDataString);
 
         })
@@ -94,6 +97,9 @@ $(function() {
             }
 
             var timeOffDataString = JSON.stringify(timeOffData);
+
+            mixpanel.track('DASHBOARD | Time off decline Button Click');
+
             ajaxUpdateAvailability(timeOffDataString);
         })
     }

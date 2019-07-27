@@ -59,4 +59,9 @@ $(function() {
     setDayScheduleDate(currentDate);
     ajaxGetDaySchedule(currentDate);
 
+    // For MixPanel
+    $('#go-to-schedule-builder').on('click', function() {
+        mixpanel.track('DASHBOARD | Schedule builder Button Click');
+    })
+
 })

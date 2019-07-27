@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+{% extends 'webapp/base.html' %}
+{% load staticfiles %}
+	<head>
+		{% block header %}
+		<title>JBS | About</title>
+		{% endblock %}
+	</head>
+	<body>
+	{% block content %}
+
+		<section id="home" class="video-hero" style="height: 500px; background-image: url({% static 'images/webapp/cover_img_1.jpg' %});  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+		<div class="overlay"></div>
+			<div class="display-t display-t2 text-center">
+				<div class="display-tc display-tc2">
+					<div class="container">
+						<div class="col-md-12 col-md-offset-0">
+							<div class="animate-box">
+								<h2>The Hive</h2>
+								<p class="breadcrumbs"><span><a href="{% url 'absolute-home' %}">Home</a></span> <span>The Hive</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="colorlib-about">
+			<div class="container">
+				<div class="row row-pb-lg">
+					<div class="col-md-6 animate-box">
+							<img class="img-responsive" src="{% static 'images/webapp/dashboard-screenshots/dashboard.png' %}" alt="">
+							<div class="overlay"></div>
+					</div>
+					<div class="col-md-6 animate-box">
+						<h2>What is it?</h2>
+						<p>The Hive™ is a web platform built for managers. Make schedules, manage time off, and monitor employee availability, all in a few clicks from anywhere you want.</p>
+						<p>But let's not forget about the employees! All in this same platform, employees can view their upcoming shifts, request time off, and change their availability.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
+						<h2>What sets us apart?</h2>
+						<p>It's no secret, there are plenty of Human Capital Management (HCM) in the marketplace. So what makes JBS and The Hive™ so special, you might be wondering? It's simple.</p>
+						<br><h3>AI Powered Automatic Scheduling</h3>.
+						<p>Harnessing the power of recent innovation in the field of artificial intelligence and machine learning, we have developed a system to schedule employees working shifts with nearly zero extra input from managers.</p>
+
+						<br><h3><a href="{% url 'demo' %}" id="try-demo">Try the demo right now, no signup required.</a></h3>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
+
+	{% block js_scripts %}
+	<!-- About-hive -->
+	<script src="{% static 'js/webapp/custom/about-hive.js' %}"></script>
+	{% endblock %}
+	</body>
+</html>
+

@@ -49,19 +49,14 @@ def count_shifts_by_day_of_week(path_to_csv):
     return shifts_for_days
 
 
-def count_total_schedules(path_to_json_dir):
-    # There may be some small bias in using this method. Does not account for days where the store is closed (Holidays).
+def get_json_schedules(path_to_json_dir):
+    json_schedules_raw = os.listdir(path_to_json_dir)
+    json_schedules_filtered = []
+    for schedule in json_schedules_raw:
+        if schedule.endswith('.json'):
+            json_schedules_filtered.append(schedule)
 
-    json_schedules = os.listdir(path_to_json_dir)
-
-    schedule_count = 0
-    for schedule in json_schedules:
-        if not schedule.endswith('.json'):
-            continue
-        else:
-            schedule_count += 1
-
-    return schedule_count
+    return json_schedules_filtered
 
 
 def get_shift_occurrence_ratio(shifts_count_for_day, schedule_count):
@@ -148,7 +143,10 @@ def graph_shift_ratio_for_week(shift_ratios):
 
 def create_shift_ratios(path_to_csv, path_to_json_dir):
     shifts_count_for_day = count_shifts_by_day_of_week(path_to_csv)
-    schedule_count = count_total_schedules(path_to_json_dir)
+
+    # There may be some small bias in using this method. Does not account for days where the store is closed (Holidays).
+    # consider counting only open days. More accurate but also more expensive.
+    schedule_count = len(get_json_schedules(path_to_json_dir))
 
     shift_ratios = get_shift_occurrence_ratio(shifts_count_for_day, schedule_count)
 

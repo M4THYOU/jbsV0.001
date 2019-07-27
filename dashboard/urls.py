@@ -4,6 +4,8 @@ from dashboard import views
 
 urlpatterns = [
 
+    path('demo/', views.Demo.as_view(), name='demo'),
+
     path('login/', views.Login.as_view(), name='login'),
     path('logout/', views.Logout.as_view(), name='logout'),
 
@@ -37,5 +39,10 @@ urlpatterns = [
     path('ajax/full-time-off/<str:date_string>/', views.full_time_off, name='full-time-off'),
 
     # END ajax #
+
+    # Demo
+    path('ajax/demo/shifts/', views.demo_get_saved_shifts, name='demo-shifts'),
+    path('ajax/demo/users/', views.demo_get_user_list, name='demo-users'),
+    path('ajax/demo/schedule/', views.demo_single_schedule, name='demo-schedule'),
 
 ]

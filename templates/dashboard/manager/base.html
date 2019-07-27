@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+{% extends 'absolute-base.html' %}
 {% load staticfiles %}
 <head>
-
+    {% block absolute-header %}
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Tell the browser to be responsive to screen width -->
@@ -48,10 +49,11 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    {% endblock %}
 
 </head>
 <body class="hold-transition skin-red-light sidebar-mini">
-
+{% block absolute-body %}
 	<div class="wrapper">
 		<header class="main-header">
     <!-- Logo -->
@@ -189,5 +191,6 @@
 	{% endblock %}
 	<!-- see dashboard.js for the creation of charts -->
 
+{% endblock %}
 </body>
 </html>

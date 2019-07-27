@@ -4,54 +4,7 @@ from .basefirebase import *
 from firesdk.util.utils import org_names_filter, department_list_to_dict, int_to_account_type, AccountType, encode_email
 
 from random import randint
-
-
-def get_all_users():
-    basic_users_ref = db.collection(u'basic_users')
-    manager_users_ref = db.collection(u'manager_users')
-
-    basic_user_documents = basic_users_ref.get()
-    manager_user_documents = manager_users_ref.get()
-
-    users = []
-
-    for doc in basic_user_documents:
-        users.append(doc.to_dict())
-
-    for doc in manager_user_documents:
-        users.append(doc.to_dict())
-
-    return users
-
-
-def generate_schedule(weeks):
-    user_list = get_all_users()
-
-    # do magic in here to make schedule
-    # this is where the fancy algorithm would go.
-    try:
-        num_of_weeks = int(weeks)
-    except ValueError:
-        return None
-
-    new_user_list = []
-
-    for user in user_list:
-        # days uses one-hot encoding, 1 = true AND 0 = false
-        schedule = []
-        days = {'sunday': randint(0, 1), 'monday': randint(0, 1),
-                'tuesday': randint(0, 1), 'wednesday': randint(0, 1),
-                'thursday': randint(0, 1), 'friday': randint(0, 1),
-                'saturday': randint(0, 1)}
-
-        for i in range(num_of_weeks):
-            schedule.append(days)
-
-        user['days_working'] = schedule
-
-        new_user_list.append(user)
-
-    return new_user_list
+from datetime import datetime, timedelta
 
 
 def get_company_by_name(name):
@@ -174,9 +127,31 @@ def set_availability(availability_dict, company, email):
 
 
 def set_needs(needs_dict, company, department):
+    current_date = datetime.utcnow()
+    week_ago = current_date - timedelta(days=7)
+
+    # First, get the current needs and add it to the past_needs collection, if it is more than 7 days old.
+    current_needs = get_needs(company, department)
+    if current_needs is not None:
+        current_needs_date_created = current_needs['date_created']
+        current_needs_date_created = current_needs_date_created.replace(tzinfo=None)
+
+        if current_needs_date_created <= week_ago:  # if current needs is more than a week old, save to past_needs
+            set_past_needs(current_needs, company, department)
+
+    # add a timestamp to needs_dict.
+    needs_dict['date_created'] = current_date
     needs = get_department_needs_ref(company, department)
-    # needs.update({'needs': needs_dict['needs'], 'shiftLength': needs_dict['shiftLength']})
     needs.set(needs_dict, merge=True)
+
+
+def set_past_needs(needs_dict, company, department):
+    past_needs = get_department_past_needs_ref_for_adding_documents(company, department)
+
+    current_date = datetime.utcnow()
+    needs_dict['last_used'] = current_date
+
+    past_needs.set(needs_dict)
 
 
 def set_department_schedule(schedule_dict, company, department):
@@ -449,7 +424,7 @@ def get_user_ref(company, email):
         user_ref.get()
 
     if not user_ref.get().exists:
-        print('User:', email, 'not found in company:', company)
+        print('User:', email, 'not found in company:', company + '. Is the email encoded?')
         print(current_company)
         user_ref = None
         # if you get none for this, it's probably because you forgot to encode the email with encode_email(email)
@@ -490,6 +465,20 @@ def get_department_needs_ref(company, department):
     needs = current_department.collection('scheduling').document('needs')
 
     return needs
+
+
+def get_department_past_needs_ref_for_adding_documents(company, department):
+    current_department = get_department_from_local_db(company, department)
+    past_needs = current_department.collection('past_needs').document()
+
+    return past_needs
+
+
+def get_department_past_needs_ref(company, department):
+    current_department = get_department_from_local_db(company, department)
+    past_needs = current_department.collection('past_needs')
+
+    return past_needs
 
 
 def get_department_schedule_ref(company, department):
@@ -598,6 +587,28 @@ def get_needs(company, department):
     return needs_dict
 
 
+def get_past_needs(company, department):
+    past_needs_ref = get_department_past_needs_ref(company, department)
+    past_needs = past_needs_ref.get()
+
+    past_needs_list = []
+    for need in past_needs:
+        past_needs_list.append(need.to_dict())
+
+    return past_needs_list
+
+
+def get_full_needs(company, department):  # past and present needs
+    company = org_names_filter(company)
+    department = org_names_filter(department)
+    current_needs_dict = get_needs(company, department)
+    past_needs_list = get_past_needs(company, department)
+
+    past_needs_list.append(current_needs_dict)
+
+    return past_needs_list
+
+
 def get_full_schedule(company, department):
     department_schedule_ref = get_department_schedule_ref(company, department)
     department_schedule = department_schedule_ref.get()
@@ -620,6 +631,27 @@ def get_user_time_off(company, email):  # assumes email is already encoded
     time_off_dict = time_off.to_dict()
 
     return time_off_dict
+
+
+def get_full_avail_and_time_off(company, department):
+    company = org_names_filter(company)
+    department = org_names_filter(department)
+
+    all_department_basic_users = get_users(company, department)
+
+    availabilities = {}
+    time_offs = {}
+    for user in all_department_basic_users:
+        email = user['email']
+        encoded_email = encode_email(email)
+
+        avail_dict = get_availability(company, encoded_email)
+        time_off_dict = get_user_time_off(company, encoded_email)
+
+        availabilities[email] = avail_dict
+        time_offs[email] = time_off_dict
+
+    return availabilities, time_offs
 
 
 def get_department_saved_shifts(company, department):
@@ -714,3 +746,83 @@ def demote_to_basic(company, email):
 
 
 # END PROMOTE/DEMOTE # from firesdk.firebase_functions.firebaseconn import promote_to_manager
+
+
+# START DEMO
+
+def get_demo_ref():
+    demo_ref = db.collection('demo').document('demo')
+    return demo_ref
+
+
+def get_demo_saved_shifts_ref():
+    demo_ref = get_demo_ref()
+    saved_shifts_ref = demo_ref.collection('saved_shifts').document('saved_shifts')
+
+    return saved_shifts_ref
+
+
+def get_demo_schedules_ref():
+    demo_ref = get_demo_ref()
+    schedules_ref = demo_ref.collection('schedules')
+
+    demo_a = schedules_ref.document('a')
+    demo_b = schedules_ref.document('b')
+    demo_c = schedules_ref.document('c')
+
+    demo_schedules_dict = {
+        'a': demo_a,
+        'b': demo_b,
+        'c': demo_c
+    }
+
+    return demo_schedules_dict
+
+
+def get_demo_user_list_ref():
+    demo_ref = get_demo_ref()
+    user_list_ref = demo_ref.collection('user_list').document('list')
+
+    return user_list_ref
+
+
+def get_demo_user_list():
+    user_list_ref = get_demo_user_list_ref()
+    user_list = user_list_ref.get()
+    user_list_dict = user_list.to_dict()
+
+    return user_list_dict
+
+
+def get_demo_saved_shifts():
+    saved_shifts_ref = get_demo_saved_shifts_ref()
+    saved_shifts = saved_shifts_ref.get()
+    saved_shifts_dict = saved_shifts.to_dict()
+
+    return saved_shifts_dict
+
+
+def get_demo_schedules():
+    schedules_ref = get_demo_schedules_ref()
+
+    schedules = {}
+    for key, schedule_ref in schedules_ref.items():
+        schedule = schedule_ref.get()
+        schedule_dict = schedule.to_dict()
+
+        schedules[key] = schedule_dict
+
+    return schedules
+
+
+def get_demo_single_schedule():
+    schedules = get_demo_schedules()
+
+    keys = list(schedules)
+    random_schedule_key = keys[randint(0, len(keys) - 1)]
+    random_schedule = schedules[random_schedule_key]
+
+    return random_schedule
+
+
+# END DEMO
