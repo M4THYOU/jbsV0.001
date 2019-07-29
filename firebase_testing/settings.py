@@ -25,7 +25,7 @@ SECRET_KEY = 'd%%5&6bdlh1lqs1m87twc!8w78tpkh)0kewrw&zyw3rt6!@r_)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['jbsystems.org', '172.105.6.234']
+ALLOWED_HOSTS = ['jbsystems.org', '172.105.6.234', 'localhost']
 
 
 # Application definition
