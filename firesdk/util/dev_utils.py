@@ -34,7 +34,7 @@ def add_known_user(account_type_int):
         display_name=user.get_full_name()
     )
 
-    user_dict = user_to_dict(position, departments, email, first_name, last_name, is_pt, account_type)
+    user_dict = user_to_dict(position, departments, email, first_name, last_name, is_pt, account_type, 'active')
     add_user(user_dict, org_names_filter('Walmart'))
 
 

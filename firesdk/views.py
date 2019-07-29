@@ -114,8 +114,9 @@ class User(APIView):
         last_name = data['name']['last']
         is_part_time = data['isPartTime']
         account_type = data['accountType']
+        status = data['status']
 
-        user_dict = user_to_dict(position, departments, email, first_name, last_name, is_part_time, account_type)
+        user_dict = user_to_dict(position, departments, email, first_name, last_name, is_part_time, account_type, status)
 
         add_user(user_dict, company)
 

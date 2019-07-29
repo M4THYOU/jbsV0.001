@@ -261,6 +261,38 @@ class Needs(BaseDashboardView):
             raise Http404
 
 
+class UserList(BaseDashboardView):
+
+    def get(self, request):
+        if not is_authenticated(request):
+            return HttpResponseRedirect('/hive/login/')
+
+        try:
+            account_type_int = request.session['account_type']
+        except KeyError:
+            raise Http404
+
+        if account_type_int == 0:
+            raise Http404
+        elif account_type_int == 1:
+            try:
+                company_id = request.session['company_id']
+            except KeyError:
+                raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING111')
+
+            try:
+                encoded_email = encode_email(request.session['email'])
+            except KeyError:
+                raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING222')
+
+            company = get_company_name_by_company_code(company_id)
+            user = get_user(company, encoded_email)
+
+            return render(request, 'dashboard/manager/user_list.html', self.get_base_dict(request))
+        else:
+            raise Http404
+
+
 class Settings(BaseDashboardView):
 
     def get(self, request):
@@ -929,6 +961,71 @@ def update_user_time_off(request):
     set_department_time_off_requests(data, company, department, email)  # merge=true might break it all??
 
     return HttpResponse('Schedule successfully updated.')
+
+
+def get_user_list(request):
+    try:
+        company_id = request.session['company_id']
+    except KeyError:
+        raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING111')
+
+    try:
+        encoded_email = encode_email(request.session['email'])
+    except KeyError:
+        raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING222')
+
+    company = get_company_name_by_company_code(company_id)
+    user = get_user(company, encoded_email)
+    department = user['primary_department']
+
+    account_type = user['account_type']
+    if account_type != 1:
+        raise Http404
+
+    user_list = get_users(company, department)
+
+    # convert user_list into a dict to be able to parse it into json
+    user_dict = {}
+    for user in user_list:
+        email = user.pop('email')
+        user_dict[email] = user
+
+    return JsonResponse(user_dict)
+
+
+def update_user_status(request):
+    data = {}
+    for key in request.POST.dict().keys():
+        data = json.loads(key)
+
+    try:
+        company_id = request.session['company_id']
+    except KeyError:
+        raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING111')
+
+    try:
+        email = request.session['email']
+        encoded_email = encode_email(email)
+    except KeyError:
+        raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING222')
+
+    company = get_company_name_by_company_code(company_id)
+    user = get_user(company, encoded_email)
+
+    account_type = user['account_type']
+    if account_type != 1:
+        raise Http404
+
+    user_email = data['email']
+    new_status = data['status']
+    set_user_status(company, user_email, new_status)
+
+    response_dict = {
+        'message': 'Status successfully updated.',
+        'email': user_email,
+        'status': new_status
+    }
+    return JsonResponse(response_dict)
 
 
 # DEMO

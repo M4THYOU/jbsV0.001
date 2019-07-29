@@ -2,6 +2,10 @@ import csv
 import os
 import matplotlib.pyplot as plt
 
+"""
+Create the ratios for both the shifts predictor and user predictor.
+"""
+
 
 def count_shifts_by_day_of_week(path_to_csv):
     """
@@ -154,3 +158,58 @@ def create_shift_ratios(path_to_csv, path_to_json_dir):
     # graph_shift_ratio_for_week(shift_ratios)
 
     return shift_ratios
+
+# Shift Predictor
+########################################################################################################################
+# User Predictor
+
+
+def create_user_ratios(path_to_csv, path_to_json_dir):
+    # first divide up shifts csv into a dict of shifts per user.
+
+    shifts_per_day_per_user = {
+        'sunday': {},
+        'monday': {},
+        'tuesday': {},
+        'wednesday': {},
+        'thursday': {},
+        'friday': {},
+        'saturday': {},
+    }
+    shift_count_per_user = {}
+    with open(path_to_csv, 'r', encoding='utf-8-sig') as csv_file:
+        reader = csv.reader(csv_file, delimiter=',')
+
+        next(reader)  # skips header line of the csv.
+        for row in reader:
+            email = row[0]
+            day_of_week = row[1]
+            time_24_hr = row[2]
+            time_12_hr = row[3]
+            schedule_file = row[4]
+            schedule_start_date = row[5]
+            schedule_end_date = row[6]
+
+            shift_item = {
+                'time_24_hr': time_24_hr,
+                'time_12_hr': time_12_hr,
+                'schedule_file': schedule_file,
+                'schedule_start_date': schedule_start_date,
+                'schedule_end_date': schedule_end_date
+            }
+
+            need to check if the user is still active in the user list!!!
+
+            # add the shift to the appropriate user and day of week.
+            if email in shifts_per_day_per_user[day_of_week]:
+                shifts_per_day_per_user[day_of_week][email].append(shift_item)
+            else:
+                shifts_per_day_per_user[day_of_week][email] = [shift_item]
+
+            # increase the count of shifts
+
+    print(shifts_per_day_per_user)
+    for email, shift_list in shifts_per_day_per_user.items():
+        print(email, shift_list)
+
+    # loop over every shift each user has

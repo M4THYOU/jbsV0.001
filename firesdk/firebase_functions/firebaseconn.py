@@ -68,7 +68,8 @@ def add_basic_user(user_dict, company):
         'name': user_dict['name'],
         'position': user_dict['position'],
         'primary_department': user_dict['primary_department'],
-        'account_type': user_dict['account_type']
+        'account_type': user_dict['account_type'],
+        'status': user_dict['status']
     }
 
     new_onboarding = {
@@ -97,7 +98,8 @@ def add_manager_user(user_dict, company):
         'name': user_dict['name'],
         'position': user_dict['position'],
         'primary_department': user_dict['primary_department'],
-        'account_type': user_dict['account_type']
+        'account_type': user_dict['account_type'],
+        'status': user_dict['status']
     }
 
     new_onboarding = {
@@ -199,6 +201,15 @@ def set_user_schedule(days_dict, company, email, merge):
 
     schedule = get_user_schedule_ref(company, encoded_email)
     schedule.set(days_dict, merge=merge)
+
+
+def set_user_status(company, email, new_status):
+    user = get_user_ref(company, encode_email(email))
+
+    if new_status != 'active' and new_status != 'leave' and new_status != 'remove':
+        raise ValueError('Invalid arg for \'new_status\':', new_status + '.', 'Must be \'active\', \'leave\', or \'remove\'.')
+
+    user.update({'status': new_status})
 
 
 def set_department_time_off_requests(time_off_dict, company, department, email):
@@ -516,7 +527,7 @@ def get_user_collection_for_department_ref(company, department):
 # START GETTING FROM DB
 
 
-def get_users(company, department):
+def get_users(company, department):  # gets all basic users
     current_company = get_company_from_local_db(org_names_filter(company))
     department_name = org_names_filter(department)
 

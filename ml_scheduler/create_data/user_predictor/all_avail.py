@@ -1,7 +1,7 @@
 from firesdk.firebase_functions.firebaseconn import get_full_avail_and_time_off
 from firesdk.util.utils import org_names_filter
 
-# Get the timeoff and availability of users to process in the neural net.
+# Get the timeoff and availability of users to process after the neural net. For the cross reference stage.
 
 
 def test(company, department):

@@ -40,6 +40,7 @@ def email_user_password_tuple_list(email_passwords):
 
 
 def register_user(company, user):
+    # Not in service
     email_password_tuple = user_auth(user)
     user_db(company, user)
 

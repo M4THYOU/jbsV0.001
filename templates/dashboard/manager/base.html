@@ -142,6 +142,11 @@
             <li class="{% if request.resolver_match.url_name == 'time-off' %}active{% endif %}"><a href="{% url 'time-off' %}"><i class="fa fa-circle-o"></i> Time Off</a></li>
           </ul>
         </li>
+        <li class="{% if request.resolver_match.url_name == 'user-list' %}active{% endif %}">
+          <a href="{% url 'user-list' %}">
+            <i class="fa fa-user"></i> <span>Employees</span>
+          </a>
+        </li>
         <li class="{% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
           <a href="{% url 'settings' %}">
             <i class="fa fa-gear"></i> <span>Settings</span>

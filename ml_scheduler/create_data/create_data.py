@@ -1,4 +1,4 @@
-from ml_scheduler.create_data.shifts_per_day import create_shift_ratios, get_json_schedules
+from ml_scheduler.create_data.shifts_per_day import create_shift_ratios, get_json_schedules, create_user_ratios
 from ml_scheduler.create_data.shift_predictor.all_needs import get_needs_methods
 from ml_scheduler.create_data.shift_predictor.schedule_data import shift_hours_sorter, start_end_int_to_24_hr_time
 from firesdk.util.utils import org_names_filter
@@ -208,20 +208,22 @@ def features_targets_from_needs_list(needs, shift_ratios, json_schedules, path_t
 
 def get_shift_data(path_to_csv, path_to_json_dir, company, department, needs_type='manual'):
     """
-    Combines all data into a list of tuples (X, y).
+    Combines all data into a list of tuples (X_df, y_df).
     :param path_to_csv: String. Path to csv file of all the shifts.
     :param path_to_json_dir: String. Path to a directory containing all json schedules.
     :param company: String. Name of the company.
     :param department: String. Name of the department in the company.
     :param needs_type: String. Specifies type of needs to use. 'manual', 'avg', or 'median'.
-    :return: Tuple of (list of (features, labels) tuples, max_scale_value).
+    :return: Tuple of (list of (features_df, labels_df), max_scale_value).
     """
 
     company = org_names_filter(company)
     department = org_names_filter(department)
 
-    shift_ratios = create_shift_ratios(path_to_csv, path_to_json_dir)
+    shift_ratios = create_shift_ratios(path_to_csv, path_to_json_dir)  # this expensive function is called twice in the creation of shift predictor!
     manual_needs, auto_avg_needs, auto_median_needs = get_needs_methods(path_to_json_dir, company, department)
+
+    print(shift_ratios)
 
     json_schedules = get_json_schedules(path_to_json_dir)
 
@@ -243,3 +245,8 @@ def get_shift_data(path_to_csv, path_to_json_dir, company, department, needs_typ
 # User Predictor
 
 
+def get_user_data(path_to_csv, path_to_json_dir, company, department, shifts_key):
+    company = org_names_filter(company)
+    department = org_names_filter(department)
+
+    create_user_ratios(path_to_csv, path_to_json_dir)

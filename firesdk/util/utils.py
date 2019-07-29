@@ -42,7 +42,7 @@ def company_to_dict(name, departments):
     return company_dict
 
 
-def user_to_dict(position, departments, email, first_name, last_name, is_part_time, account_type):
+def user_to_dict(position, departments, email, first_name, last_name, is_part_time, account_type, status):
     user_dict = {
         'email': email,
         'encoded_email': encode_email(email),
@@ -53,7 +53,8 @@ def user_to_dict(position, departments, email, first_name, last_name, is_part_ti
         'position': position,
         'departments': departments,
         'is_part_time': is_part_time,
-        'account_type': account_type
+        'account_type': account_type,
+        'status': status
     }
 
     return user_dict

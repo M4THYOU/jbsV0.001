@@ -19,6 +19,7 @@ urlpatterns = [
 
     # Manager Only
     path('needs/', views.Needs.as_view(), name='needs'),
+    path('user-list/', views.UserList.as_view(), name='user-list'),
 
     # START ajax #
 
@@ -37,6 +38,8 @@ urlpatterns = [
     path('ajax/full-schedule/', views.update_full_schedule, name='full-schedule'),
     path('ajax/saved-shifts/', views.get_saved_shifts, name='saved-shifts'),
     path('ajax/full-time-off/<str:date_string>/', views.full_time_off, name='full-time-off'),
+    path('ajax/user-list/', views.get_user_list, name='get-user-list'),
+    path('ajax/user-list/update/', views.update_user_status, name='update-user-status'),
 
     # END ajax #
 

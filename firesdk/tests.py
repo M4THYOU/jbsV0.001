@@ -3,7 +3,6 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "firebase_testing.settings")
 application = get_wsgi_application()
 
-"""
 json_path = '/Users/matthewwolfe/Documents/JBS/test_data/Schedule JSON/'
 csv_path = '/Users/matthewwolfe/Documents/JBS/test_data/'
 
@@ -53,17 +52,21 @@ json_schedules_to_csv_by_shift(json_path, csv_path)
 
 ########################################################################################################################
 
-# from ml_scheduler.ml_pipeline.shift_predictor import predict_week_shifts
+from ml_scheduler.ml_pipeline.shift_predictor import predict_week_shifts
 
-# predict_week_shifts(csv_path + 'schedule_by_shift.csv', json_path, 'Sobeys', 'Deli', needs_type='manual',
-#                     remove_ratios=False, remove_needs=False)
+predictions, shifts_key = predict_week_shifts(csv_path + 'schedule_by_shift.csv', json_path, 'Sobeys', 'Deli',
+                                              needs_type='median', remove_ratios=False, remove_needs=False)
 
 ########################################################################################################################
 
-from ml_scheduler.create_data.user_predictor.all_avail import test
+# from ml_scheduler.create_data.user_predictor.all_avail import test
 
-test('Sobeys', 'Deli')
-"""
+# test('Sobeys', 'Deli')
+from ml_scheduler.create_data.create_data import get_user_data
 
-from firesdk.util.dev_utils import generate_demo_data
-generate_demo_data()
+get_user_data(csv_path + 'schedule_by_shift.csv', json_path, 'Sobeys', 'Deli', shifts_key)
+
+########################################################################################################################
+
+# from firesdk.util.dev_utils import generate_demo_data
+# generate_demo_data()
