@@ -223,20 +223,23 @@ $(function() {
     }
 
     $('#actual-add-user-button').on('click', function() {
-
         var cleanedForm = validateUserForm();
+        var jsonCleanedForm = JSON.stringify(cleanedForm);
+
         var isValid = cleanedForm['isValid'];
 
         if (isValid) {
-            console.log('make ajax request');
+            $('#user-list-box').append('<div class="overlay" id="added-user-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+            $('#modal-user-adder').modal('hide');
 
             $.ajax({
             url: "/hive/ajax/user-list/new/",
             type: "POST",
-            data: cleanedForm,
+            data: jsonCleanedForm,
             timeout: 15000,
             success: function(data) {
                 console.log(data);
+                $('#added-user-loading-indicator').remove();
                 /*
                 var message = data['message'];
                 var newStatus = data['status'];
@@ -247,6 +250,7 @@ $(function() {
 
                 showAlert(message, true);
                 */
+
             },
             error: function(xhr, textStatus, errorThrown) {
                 $('#status-change-loading-indicator').remove();
