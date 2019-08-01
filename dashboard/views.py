@@ -1028,6 +1028,45 @@ def update_user_status(request):
     return JsonResponse(response_dict)
 
 
+def new_user_on_list(request):
+    data = {}
+    for key in request.POST.dict().keys():
+        data = json.loads(key)
+
+    try:
+        company_id = request.session['company_id']
+    except KeyError:
+        raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING111')
+
+    try:
+        email = request.session['email']
+        encoded_email = encode_email(email)
+    except KeyError:
+        raise ValueError('CHANGE THIS SHIT TO A 404 OR SOMETHING222')
+
+    company = get_company_name_by_company_code(company_id)
+    user = get_user(company, encoded_email)
+
+    account_type = user['account_type']
+    if account_type != 1:
+        raise Http404
+
+    """
+
+    user_email = data['email']
+    new_status = data['status']
+    set_user_status(company, user_email, new_status)
+
+    response_dict = {
+        'message': 'Status successfully updated.',
+        'email': user_email,
+        'status': new_status
+    }
+    return JsonResponse(response_dict)
+    """
+    return JsonResponse(data)
+
+
 # DEMO
 def demo_get_saved_shifts(request):
     saved_shifts = get_demo_saved_shifts()

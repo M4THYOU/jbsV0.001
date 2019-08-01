@@ -210,12 +210,55 @@ $(function() {
             $positionField.css('border-color', '');
         }
 
-        return isValid;
+        var cleanedForm = {
+            'isValid': isValid,
+            'first': first,
+            'last': last,
+            'email': email,
+            'position': position,
+            'isPt': isPt
+        }
+
+        return cleanedForm;
     }
 
     $('#actual-add-user-button').on('click', function() {
-        if (validateUserForm()) {
+
+        var cleanedForm = validateUserForm();
+        var isValid = cleanedForm['isValid'];
+
+        if (isValid) {
             console.log('make ajax request');
+
+            $.ajax({
+            url: "/hive/ajax/user-list/new/",
+            type: "POST",
+            data: cleanedForm,
+            timeout: 15000,
+            success: function(data) {
+                console.log(data);
+                /*
+                var message = data['message'];
+                var newStatus = data['status'];
+                var email = data['email'];
+                $('#status-change-loading-indicator').remove();
+
+                changeStatusBadge(email, newStatus);
+
+                showAlert(message, true);
+                */
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                $('#status-change-loading-indicator').remove();
+                showAlert('Error: "' + errorThrown + '"', false);
+            },
+            beforeSend: function(xhr, settings) {
+                if (!this.crossDomain) {
+                    xhr.setRequestHeader('X-CSRFToken', csrfToken);
+                }
+            }
+        })
+
         }
     })
 

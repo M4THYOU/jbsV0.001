@@ -40,6 +40,7 @@ urlpatterns = [
     path('ajax/full-time-off/<str:date_string>/', views.full_time_off, name='full-time-off'),
     path('ajax/user-list/', views.get_user_list, name='get-user-list'),
     path('ajax/user-list/update/', views.update_user_status, name='update-user-status'),
+    path('ajax/user-list/new/', views.new_user_on_list, name='add-new-user'),
 
     # END ajax #
 
