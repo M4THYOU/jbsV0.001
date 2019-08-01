@@ -5,7 +5,9 @@ from django.views import View
 from .forms import LoginForm
 
 from firesdk.firebase_functions.firebaseconn import *
-from firesdk.util.utils import availability_to_dict, standard_to_military_time, unfilter_org_names
+from firesdk.util.utils import availability_to_dict, standard_to_military_time, unfilter_org_names, user_to_dict
+
+from onboarding.onboard import add_single_user, email_single_user
 
 from dashboard.custom.auth_utils import *
 
@@ -1046,24 +1048,39 @@ def new_user_on_list(request):
 
     company = get_company_name_by_company_code(company_id)
     user = get_user(company, encoded_email)
+    department = user['primary_department']
 
     account_type = user['account_type']
     if account_type != 1:
         raise Http404
 
-    """
+    first_name = data['first']
+    last_name = data['last']
+    email = data['email']
+    position = data['position']
+    is_pt = data['isPt']
 
-    user_email = data['email']
-    new_status = data['status']
-    set_user_status(company, user_email, new_status)
-
-    response_dict = {
-        'message': 'Status successfully updated.',
-        'email': user_email,
-        'status': new_status
+    new_user_dict = {
+        'last_name': last_name,
+        'first_name': first_name,
+        'email': email,
+        'position': position,
+        'departments': [department],
+        'is_pt': is_pt,
+        'account_type': 0,
+        'status': 'active'
     }
-    return JsonResponse(response_dict)
-    """
+
+    user_ref = get_user_ref(org_names_filter(company), encode_email(email))
+    if user_ref is None:
+        email_info_dict = add_single_user(new_user_dict, company)
+        email_single_user(email_info_dict, company_id)
+        data['message'] = 'New employee successfully added.'
+        data['success'] = True
+    else:
+        data['success'] = False
+        data['message'] = 'An employee with that email address already exists.'
+
     return JsonResponse(data)
 
 

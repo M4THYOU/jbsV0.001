@@ -43,6 +43,17 @@ def company_to_dict(name, departments):
 
 
 def user_to_dict(position, departments, email, first_name, last_name, is_part_time, account_type, status):
+    """
+    :param position: String. Job role at the company.
+    :param departments: List of strings. Departments the user is a part of, within the company.
+    :param email: String. Email address.
+    :param first_name: String.
+    :param last_name: String.
+    :param is_part_time: Bool. Whether or not the user is a part time employee.
+    :param account_type: Int. 0 == basic, 1 == manager, 2 == master (not currently in service).
+    :param status: String. One of 'active', 'leave', or 'remove'.
+    :return:
+    """
     user_dict = {
         'email': email,
         'encoded_email': encode_email(email),

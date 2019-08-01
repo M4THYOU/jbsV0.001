@@ -238,22 +238,33 @@ $(function() {
             data: jsonCleanedForm,
             timeout: 15000,
             success: function(data) {
-                console.log(data);
+
+                if (data['success']) {
+                    var name = data['first'] + ' ' + data['last'];
+                    var email = data['email'];
+
+                    var userRow = (
+                        '<tr data-email="' + email + '">' +
+                            '<td>' + name + '</td><td>' + email + '</td>' +
+                            '<td class="status-badge"><span class="label label-success">Active</span></td>' +
+                            '<th><div>' +
+                                    '<button type="button" class="btn btn-success btn-status status-activate">Activate</button>' +
+                                    '<button type="button" class="btn btn-warning btn-status status-leave">Put on leave</button>' +
+                                    '<button type="button" class="btn btn-danger btn-status status-remove">Remove</button>' +
+                            '</div></th>' +
+                        '</tr>'
+                    );
+
+                    var tableBody = $('#user-list-table').find('tbody');
+                    tableBody.find('tr').eq(0).after(userRow);
+                }
+
                 $('#added-user-loading-indicator').remove();
-                /*
-                var message = data['message'];
-                var newStatus = data['status'];
-                var email = data['email'];
-                $('#status-change-loading-indicator').remove();
-
-                changeStatusBadge(email, newStatus);
-
-                showAlert(message, true);
-                */
+                showAlert(data['message'], data['success']);
 
             },
             error: function(xhr, textStatus, errorThrown) {
-                $('#status-change-loading-indicator').remove();
+                $('#added-user-loading-indicator').remove();
                 showAlert('Error: "' + errorThrown + '"', false);
             },
             beforeSend: function(xhr, settings) {
