@@ -1,0 +1,187 @@
+Email,Company,Department,Account Type,Date,Time,Timezone,Event Type,Session Id,Other Data
+mathyou.wolfe@gmail.com,walmart,store_standards,0,06/03/2019,"[19, 31, 56]",EST,appOpened,wbe2xfbf04bvqa1ze77g1jwm0oep9w6x,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 17, 16]",EST,appOpened,yigatswfqmp7c8epdn8kau0td81z7vli,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 18, 55]",EST,appOpened,zfnijzsro4eewg6xsafg6wh97ziqjaj9,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 18, 58]",EST,tabChanged,zfnijzsro4eewg6xsafg6wh97ziqjaj9,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 22, 28]",EST,appOpened,yzw5pxoemt62enr3fcf3269r17m6dsdz,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 22, 31]",EST,tabChanged,yzw5pxoemt62enr3fcf3269r17m6dsdz,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 31, 53]",EST,appOpened,7lu5b8eshn5qvfx1ekg6gur77vwutit6,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 31, 57]",EST,tabChanged,7lu5b8eshn5qvfx1ekg6gur77vwutit6,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 32, 40]",EST,appOpened,gwll7f3y95eyfwokezbabca9o6mv4bwv,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 32, 41]",EST,tabChanged,gwll7f3y95eyfwokezbabca9o6mv4bwv,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 34, 43]",EST,appOpened,synvr00x1pxge6ksbrcpc7zlhwimrckl,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 34, 49]",EST,tabChanged,synvr00x1pxge6ksbrcpc7zlhwimrckl,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 35, 35]",EST,appOpened,vt5qb5wlfsub3up8smloefnujy9vtf08,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 39, 8]",EST,appOpened,2kng8jze8f4noywlj0vmqcz2v539ifje,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 41, 5]",EST,appOpened,amn26bunv494hg3xyx6na4lbvqzdxjim,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 41, 14]",EST,tabChanged,amn26bunv494hg3xyx6na4lbvqzdxjim,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 41, 15]",EST,tabChanged,amn26bunv494hg3xyx6na4lbvqzdxjim,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[11, 41, 17]",EST,scheduleMakerUserListOpened,amn26bunv494hg3xyx6na4lbvqzdxjim,{}
+/XX/,/XX/,/XX/,0,09/03/2019,"[13, 48, 52]",EST,appOpened,6eyn4zkc04si8kh7krn42ruwwkzxqkfh,{}
+mathyou.wolfe@gmail.com,walmart,/XX/,100,09/03/2019,"[13, 49, 33]",EST,loggedIn,6eyn4zkc04si8kh7krn42ruwwkzxqkfh,{}
+mathyou.wolfe@gmail.com,walmart,/XX/,100,09/03/2019,"[14, 18, 46]",EST,appOpened,ksgdqjn1jcnx457pbo35rm76u0u38vce,{}
+mathyou.wolfe@gmail.com,walmart,/XX/,100,09/03/2019,"[14, 18, 53]",EST,tabChanged,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""controllerTitle"": ""BasicHomeControllerB""}"
+mathyou.wolfe@gmail.com,walmart,/XX/,100,09/03/2019,"[14, 18, 53]",EST,tabChanged,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""controllerTitle"": ""BasicHomeControllerC""}"
+mathyou.wolfe@gmail.com,walmart,/XX/,100,09/03/2019,"[14, 18, 54]",EST,tabChanged,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""controllerTitle"": ""MyProfileVC""}"
+mathyou.wolfe@gmail.com,walmart,/XX/,100,09/03/2019,"[14, 18, 56]",EST,settingItemPressed,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""settingName"": ""Logout""}"
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 19, 8]",EST,loggedIn,ksgdqjn1jcnx457pbo35rm76u0u38vce,{}
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 19, 19]",EST,tabChanged,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""controllerTitle"": ""BasicHomeControllerB""}"
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 19, 20]",EST,tabChanged,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""controllerTitle"": ""BasicHomeControllerC""}"
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 19, 21]",EST,tabChanged,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 20, 25]",EST,tabChanged,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""controllerTitle"": ""BasicHomeControllerC""}"
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 20, 26]",EST,tabChanged,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""controllerTitle"": ""BasicHomeControllerB""}"
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 20, 26]",EST,tabChanged,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""controllerTitle"": ""BasicHomeControllerA""}"
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 20, 29]",EST,tabChanged,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 20, 32]",EST,settingItemPressed,ksgdqjn1jcnx457pbo35rm76u0u38vce,"{""settingName"": ""Logout""}"
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 20, 44]",EST,loggedIn,ksgdqjn1jcnx457pbo35rm76u0u38vce,{}
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 20, 52]",EST,appOpened,6p6q1dlrx2hrcanvarch6mc1hyufbyfi,{}
+val@gmail.com,walmart,store_standards,100,09/03/2019,"[14, 20, 55]",EST,tabChanged,6p6q1dlrx2hrcanvarch6mc1hyufbyfi,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 21, 42]",EST,loggedIn,ag0yd9eayxh5bzrryzfdc0nepzzbm204,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 21, 54]",EST,tabChanged,ag0yd9eayxh5bzrryzfdc0nepzzbm204,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 21, 56]",EST,tabChanged,ag0yd9eayxh5bzrryzfdc0nepzzbm204,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 21, 57]",EST,tabChanged,ag0yd9eayxh5bzrryzfdc0nepzzbm204,"{""controllerTitle"": ""ManagerHomeControllerC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 21, 58]",EST,tabChanged,ag0yd9eayxh5bzrryzfdc0nepzzbm204,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 22, 0]",EST,tabChanged,ag0yd9eayxh5bzrryzfdc0nepzzbm204,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 22, 42]",EST,appOpened,dmw6xkjn30xvz65kg26ko98lyj2pe1vr,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 25, 13]",EST,appOpened,wvwmywfzmh3wvve82hpof481e7p0c51w,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 26, 45]",EST,appOpened,ginh37cfjqi7qew2qm0n1io917qv0ad4,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 3]",EST,appOpened,x2fnkc23xssqb40k7l4pj44x1gxxep18,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 12]",EST,scheduleMakerUserListOpened,x2fnkc23xssqb40k7l4pj44x1gxxep18,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 21]",EST,scheduleMakerUserListOpened,x2fnkc23xssqb40k7l4pj44x1gxxep18,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 28]",EST,scheduleMakerUserListOpened,x2fnkc23xssqb40k7l4pj44x1gxxep18,{}
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 41]",EST,tabChanged,x2fnkc23xssqb40k7l4pj44x1gxxep18,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 42]",EST,tabChanged,x2fnkc23xssqb40k7l4pj44x1gxxep18,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 44]",EST,tabChanged,x2fnkc23xssqb40k7l4pj44x1gxxep18,"{""controllerTitle"": ""ManagerHomeControllerC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 45]",EST,tabChanged,x2fnkc23xssqb40k7l4pj44x1gxxep18,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 46]",EST,tabChanged,x2fnkc23xssqb40k7l4pj44x1gxxep18,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 46]",EDT,tabChanged,x2fnkc23xssqb40k7l4pj44x1gxxep18,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 30, 29]",EDT,tabChanged,x2fnkc23xssqb40k7l4pj44x1gxxep18,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 30, 30]",EDT,tabChanged,x2fnkc23xssqb40k7l4pj44x1gxxep18,"{""controllerTitle"": ""ManagerHomeControllerC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 30, 30]",EDT,tabChanged,x2fnkc23xssqb40k7l4pj44x1gxxep18,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 30, 31]",EDT,tabChanged,x2fnkc23xssqb40k7l4pj44x1gxxep18,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,09/03/2019,"[14, 29, 47]",EDT,scheduleMakerUserListOpened,x2fnkc23xssqb40k7l4pj44x1gxxep18,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[12, 49, 55]",EDT,appOpened,e4dvznlb187d85m89a5v8manffhlxs00,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[12, 50, 43]",EDT,scheduleMakerUserListOpened,e4dvznlb187d85m89a5v8manffhlxs00,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[12, 50, 25]",EDT,tabChanged,e4dvznlb187d85m89a5v8manffhlxs00,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[12, 50, 39]",EDT,tabChanged,e4dvznlb187d85m89a5v8manffhlxs00,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[12, 51, 13]",EDT,appOpened,99uvk6l633b88ylt3slsr4ycyq83lbcq,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[12, 57, 36]",EDT,loggedIn,99uvk6l633b88ylt3slsr4ycyq83lbcq,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[13, 9, 50]",EDT,appOpened,rh5dzvokoqqfjsmr6zgpzu0chwibg9q8,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[13, 16, 0]",EDT,appOpened,lgeqna6wxzsihu9to860yj6tpfrucg1y,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[13, 25, 4]",EDT,appOpened,143weou2pqcujxoqzwk9m1ra8jkasdzg,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[13, 25, 27]",EDT,appOpened,nbs9cnybh4xj05grndc27nl5evll8ml4,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[13, 31, 25]",EDT,appOpened,wfumsegc5sgoelytzfkn5dasl1sl0a2l,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[13, 31, 30]",EDT,tabChanged,wfumsegc5sgoelytzfkn5dasl1sl0a2l,"{""controllerTitle"": ""BasicHomeControllerB""}"
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[13, 48, 53]",EDT,tabChanged,wfumsegc5sgoelytzfkn5dasl1sl0a2l,"{""controllerTitle"": ""MyProfileVC""}"
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[13, 48, 58]",EDT,settingItemPressed,wfumsegc5sgoelytzfkn5dasl1sl0a2l,"{""settingName"": ""Logout""}"
+val@gmail.com,walmart,store_standards,100,10/03/2019,"[13, 49, 7]",EDT,loggedIn,wfumsegc5sgoelytzfkn5dasl1sl0a2l,{}
+val@gmail.com,walmart,store_standards,100,10/03/2019,"[13, 49, 25]",EDT,appOpened,95cijqh1to6meaalpt39ex35eghz0de5,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[13, 49, 45]",EDT,loggedIn,95cijqh1to6meaalpt39ex35eghz0de5,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[13, 49, 49]",EDT,scheduleMakerUserListOpened,95cijqh1to6meaalpt39ex35eghz0de5,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[13, 53, 13]",EDT,appOpened,numqv6otnvyfyjp284j1aq0tw7bgu2mg,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[13, 53, 33]",EDT,tabChanged,numqv6otnvyfyjp284j1aq0tw7bgu2mg,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[14, 1, 39]",EDT,tabChanged,numqv6otnvyfyjp284j1aq0tw7bgu2mg,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[14, 1, 42]",EDT,settingItemPressed,numqv6otnvyfyjp284j1aq0tw7bgu2mg,"{""settingName"": ""Logout""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[14, 2, 23]",EDT,loggedIn,numqv6otnvyfyjp284j1aq0tw7bgu2mg,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[14, 2, 28]",EDT,tabChanged,numqv6otnvyfyjp284j1aq0tw7bgu2mg,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[14, 2, 28]",EDT,tabChanged,numqv6otnvyfyjp284j1aq0tw7bgu2mg,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[14, 2, 29]",EDT,scheduleMakerUserListOpened,numqv6otnvyfyjp284j1aq0tw7bgu2mg,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[14, 2, 48]",EDT,tabChanged,numqv6otnvyfyjp284j1aq0tw7bgu2mg,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[14, 5, 40]",EDT,appOpened,l1bosu6cnupstfm49sg37do5p7sn6yc5,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[14, 5, 49]",EDT,scheduleMakerUserListOpened,l1bosu6cnupstfm49sg37do5p7sn6yc5,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[14, 5, 52]",EDT,scheduleMakerUserListOpened,l1bosu6cnupstfm49sg37do5p7sn6yc5,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[21, 8, 1]",EDT,appOpened,0vo2i2wz0wa1xkl4weu2i2c58hasaeg1,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[21, 8, 35]",EDT,tabChanged,0vo2i2wz0wa1xkl4weu2i2c58hasaeg1,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[21, 8, 35]",EDT,tabChanged,0vo2i2wz0wa1xkl4weu2i2c58hasaeg1,"{""controllerTitle"": ""ManagerHomeControllerC""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[21, 8, 36]",EDT,tabChanged,0vo2i2wz0wa1xkl4weu2i2c58hasaeg1,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[21, 8, 37]",EDT,tabChanged,0vo2i2wz0wa1xkl4weu2i2c58hasaeg1,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[21, 8, 33]",EDT,scheduleMakerUserListOpened,0vo2i2wz0wa1xkl4weu2i2c58hasaeg1,{}
+val@gmail.com,walmart,store_standards,1,10/03/2019,"[21, 8, 44]",EDT,appOpened,zdy7dad0sf8v5nc96sp8hrlkhwfyjf2q,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[21, 16, 54]",EDT,appOpened,r5uoaainh7grprid6hqrz4178m3ie9q5,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,100,10/03/2019,"[21, 17, 55]",EDT,appOpened,eo9n9f7cnacixm4wmdhxzqaggiakqv9q,{}
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 21, 44]",EDT,loggedIn,u18w25r3ivr1a7pkqxztg6n9qndu037e,{}
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 21, 53]",EDT,tabChanged,u18w25r3ivr1a7pkqxztg6n9qndu037e,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 21, 54]",EDT,tabChanged,u18w25r3ivr1a7pkqxztg6n9qndu037e,"{""controllerTitle"": ""ManagerHomeControllerC""}"
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 21, 55]",EDT,tabChanged,u18w25r3ivr1a7pkqxztg6n9qndu037e,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 21, 56]",EDT,scheduleMakerUserListOpened,u18w25r3ivr1a7pkqxztg6n9qndu037e,{}
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 22, 3]",EDT,scheduleMakerUserListOpened,u18w25r3ivr1a7pkqxztg6n9qndu037e,{}
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 22, 5]",EDT,tabChanged,u18w25r3ivr1a7pkqxztg6n9qndu037e,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 22, 6]",EDT,tabChanged,u18w25r3ivr1a7pkqxztg6n9qndu037e,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 22, 8]",EDT,scheduleMakerUserListOpened,u18w25r3ivr1a7pkqxztg6n9qndu037e,{}
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 57, 55]",EDT,appOpened,usboh76n583bggvf7592kjca91bnydhh,{}
+val@gmail.com,walmart,store_standards,1,13/03/2019,"[20, 58, 39]",EDT,appOpened,j2w032kivzsrppq3bv25aq7wp6w3nb1t,{}
+/XX/,/XX/,/XX/,0,13/03/2019,"[21, 57, 34]",EDT,appOpened,b2cdjodsbg2bu6vf2y04bmrcgymcbql0,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[11, 38, 28]",EDT,appOpened,ukcqdplv0fckkguzcwtbigde14h7fyn2,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[11, 47, 35]",EDT,appOpened,d4ogqikflviumo5ubez81rslkj4dcfxl,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[11, 47, 39]",EDT,scheduleMakerUserListOpened,d4ogqikflviumo5ubez81rslkj4dcfxl,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[11, 49, 55]",EDT,appOpened,2u8a0obvmvx4pk7umlz9zy4dyn0twcdp,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[11, 50, 50]",EDT,appOpened,8odav9985qgkc15trzcm78r6gelvhcjy,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[11, 57, 42]",EDT,appOpened,r5rq2v7pa4k48246kdm71drzlk1xagif,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[11, 58, 13]",EDT,appOpened,zxtic9w7r5ew8su6s32trvq6gxwhvblq,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[11, 58, 53]",EDT,appOpened,4mzggzn7c2052vbvhjkjleqjktyzwkuo,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[11, 59, 43]",EDT,appOpened,k2er2y9r2qh41ew0xcnanunp8rtvowpt,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 1, 29]",EDT,appOpened,aqk5jf2zeyzztno229yff8611yjudlmn,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 11, 9]",EDT,appOpened,uzqe8f662qrvgr4glxwmtwn1emne3n4b,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 11, 58]",EDT,appOpened,pokavtrvl4a9zitzk76umtpchlyqwjd5,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 12, 51]",EDT,appOpened,e9kqkhfnv5anxi0yvxucbxnmiyp75fw2,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 13, 23]",EDT,appOpened,ld8g2h03a8gvcymgs0qkkc7sfvat7zzb,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 14, 23]",EDT,appOpened,sk666n0gx1cqkqfhrbgijtrs8s3m1j4g,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 14, 43]",EDT,appOpened,l9ncg2fag3fqe0qnfjqp99a87d9zju63,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 19, 8]",EDT,appOpened,dm9f486c3ud4kbpjg1i9h3hf6n4lhn5u,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 21, 35]",EDT,appOpened,c9ltpq3ae3h5k217wurm8jft9o4f06r7,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 26, 23]",EDT,appOpened,i6hmqsgsdq8qm5ewza8wptlbkr5i4lse,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 26, 49]",EDT,appOpened,r0dszb16tcmvveov0qlz8tjv22rj9rts,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 34, 56]",EDT,appOpened,njg65ghftstljcw0wdkix7u65funq9kz,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 35, 23]",EDT,appOpened,1gr8kvwpnda3wu9vawkoxas0kw94ca6m,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 36, 2]",EDT,appOpened,ngg4eq61rmh8n3qvq5morfhem1s0ydwa,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 36, 40]",EDT,appOpened,1o8pm78f3jpme8sppgnmsx97e2ii8hgo,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 37, 30]",EDT,appOpened,03a3rzcujowgp153aqnv43j3mqxgw1pm,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[12, 47, 39]",EDT,appOpened,3x5mkhs3jxmckbcrfd7hrt82m1td4lp4,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[13, 34, 26]",EDT,appOpened,fk675bhya8blltcb1t3my330imc6jd2k,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 16, 45]",EDT,appOpened,Not set,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 24, 27]",EDT,appOpened,Not set,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 28, 56]",EDT,appOpened,Not set,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 30, 38]",EDT,appOpened,5twkg0voabnlzlihrmn5rri4m3m9ex9z,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 30, 54]",EDT,scheduleMakerUserListOpened,5twkg0voabnlzlihrmn5rri4m3m9ex9z,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 32, 55]",EDT,appOpened,26js7e0ei37cgn8jpc1lfa2rowhcl9il,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 52, 23]",EDT,appOpened,786rerthlbsknabdh1x5bzbjjdq3auki,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 52, 27]",EDT,tabChanged,786rerthlbsknabdh1x5bzbjjdq3auki,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 52, 28]",EDT,tabChanged,786rerthlbsknabdh1x5bzbjjdq3auki,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 52, 35]",EDT,scheduleMakerUserListOpened,786rerthlbsknabdh1x5bzbjjdq3auki,{}
+val@gmail.com,walmart,store_standards,1,14/03/2019,"[21, 53, 41]",EDT,scheduleMakerUserDroppedInList,786rerthlbsknabdh1x5bzbjjdq3auki,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 19, 56]",EDT,appOpened,fkg8mb2e8sizff6y8ft1oydu6oy4uf61,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 20, 59]",EDT,appOpened,8ey61ccd0y38r4iohybfgtues5ygvpsv,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 29, 20]",EDT,appOpened,ei4guc7h9vbcjxknsqx2kz8d20l2qoo0,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 29, 57]",EDT,appOpened,ds0f2cqsu3t3023738t9jjik6l8f304o,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 34, 14]",EDT,appOpened,hgg8ivv0kvrnbrzywtlmghwykk1j0m98,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 39, 49]",EDT,appOpened,cbvgtyyu81wueashz7nppbje4i7kvxm2,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 39, 50]",EDT,scheduleMakerUserListOpened,cbvgtyyu81wueashz7nppbje4i7kvxm2,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 40, 51]",EDT,appOpened,64vqngnfrac6tlevnbnjprvb352k01ym,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,0,15/03/2019,"[10, 41, 45]",EDT,loggedIn,64vqngnfrac6tlevnbnjprvb352k01ym,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 43, 30]",EDT,loggedIn,a1gk5ikxnf4d0nmk7t1awc6hg9k28rto,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 43, 34]",EDT,scheduleMakerUserListOpened,a1gk5ikxnf4d0nmk7t1awc6hg9k28rto,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[10, 51, 9]",EDT,appOpened,6jw4rx9o5vbvr1r0g4azlbucii10yn84,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 27, 29]",EDT,appOpened,m8x0pjadwgnr6cep0j1iqlmxem4v3j2l,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 28, 42]",EDT,appOpened,m0giw6094my2umgim9c11z0qbt8cnh7h,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 29, 55]",EDT,appOpened,ylfuc3fe2xgw0ld3e6j9lcogssbh30ij,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 31, 15]",EDT,appOpened,qly5lxuhwru2yz66a41yf58k14ptbj38,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 31, 18]",EDT,tabChanged,qly5lxuhwru2yz66a41yf58k14ptbj38,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 31, 20]",EDT,settingItemPressed,qly5lxuhwru2yz66a41yf58k14ptbj38,"{""settingName"": ""Logout""}"
+/XX/,/XX/,/XX/,0,15/03/2019,"[11, 32, 56]",EDT,appOpened,d7s78kfk9635g5iu2fip044p7eykk99r,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,0,15/03/2019,"[11, 33, 35]",EDT,loggedIn,d7s78kfk9635g5iu2fip044p7eykk99r,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 37, 49]",EDT,loggedIn,uto6xx7rh5xf43gmj7om6qzd7abesxza,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 38, 27]",EDT,scheduleMakerAutoScheduleButtonPressed,uto6xx7rh5xf43gmj7om6qzd7abesxza,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 38, 29]",EDT,scheduleMakerAutoScheduleButtonPressed,uto6xx7rh5xf43gmj7om6qzd7abesxza,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 38, 12]",EDT,tabChanged,uto6xx7rh5xf43gmj7om6qzd7abesxza,"{""controllerTitle"": ""ManagerHomeControllerC""}"
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 38, 17]",EDT,tabChanged,uto6xx7rh5xf43gmj7om6qzd7abesxza,"{""controllerTitle"": ""MyProfileVC""}"
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 38, 20]",EDT,tabChanged,uto6xx7rh5xf43gmj7om6qzd7abesxza,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 38, 20]",EDT,tabChanged,uto6xx7rh5xf43gmj7om6qzd7abesxza,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 38, 23]",EDT,tabChanged,uto6xx7rh5xf43gmj7om6qzd7abesxza,"{""controllerTitle"": ""ManagerHomeControllerC""}"
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 38, 24]",EDT,tabChanged,uto6xx7rh5xf43gmj7om6qzd7abesxza,"{""controllerTitle"": ""ManagerHomeControllerB""}"
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[11, 38, 25]",EDT,tabChanged,uto6xx7rh5xf43gmj7om6qzd7abesxza,"{""controllerTitle"": ""ManagerHomeControllerA""}"
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[18, 58, 29]",EDT,appOpened,1gh6cetfpozw9bn80irxpnmv7yotdvl7,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[18, 59, 6]",EDT,appOpened,cbh31flvh3rwxsh490c4qqlhhkky7pn4,{}
+val@gmail.com,walmart,store_standards,1,15/03/2019,"[18, 59, 13]",EDT,scheduleMakerUserListOpened,cbh31flvh3rwxsh490c4qqlhhkky7pn4,{}
+/XX/,/XX/,/XX/,0,15/03/2019,"[19, 0, 6]",EDT,appOpened,pohupdwgxf8p78xopz8bykpjr066wo7b,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,0,15/03/2019,"[19, 1, 26]",EDT,loggedIn,pohupdwgxf8p78xopz8bykpjr066wo7b,{}
+mathyou.wolfe@gmail.com,walmart,store_standards,0,15/03/2019,"[19, 6, 19]",EDT,appOpened,5drlzvez2783nkjunpce7w9et8kdhx1c,{}
