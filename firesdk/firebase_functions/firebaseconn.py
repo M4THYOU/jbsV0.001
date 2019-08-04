@@ -542,10 +542,28 @@ def get_users(company, department):  # gets all basic users
         availability = availability_ref.get()
         availability_dict = availability.to_dict()
         user_dict['is_part_time'] = availability_dict['is_part_time']
+        user_dict['avail'] = availability_dict
 
         # new_departments = department_list_to_dict(user_dict['departments'])
 
         # user_dict['departments'] = new_departments
+
+        users.append(user_dict)
+
+    return users
+
+
+def get_manager_users(company, department):
+    current_company = get_company_from_local_db(org_names_filter(company))
+    department_name = org_names_filter(department)
+
+    users_ref = current_company.collection('manager_users')
+    user_docs = users_ref.where('primary_department', '==', department_name).get()
+
+    users = []
+    for user in user_docs:
+        user_dict = user.to_dict()
+        user_dict['is_part_time'] = True
 
         users.append(user_dict)
 

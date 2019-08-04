@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
 .selected-avail-btn {
-    background-color: #e7e7e7;
-    border-color: #adadad;
+    background-color: #e7e7e7 !important;
+    border-color: #adadad !important;
 
-    box-shadow: 0px 2px 15px #adadad inset;
+    box-shadow: 0px 2px 15px #adadad inset !important;
 
-    z-index: 10;
+    z-index: 10 !important;
 }
 
 .day-avail-box>.box-header>h3 {

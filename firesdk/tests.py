@@ -52,21 +52,27 @@ json_schedules_to_csv_by_shift(json_path, csv_path)
 
 ########################################################################################################################
 
-from ml_scheduler.ml_pipeline.shift_predictor import predict_week_shifts
+# from ml_scheduler.ml_pipeline.shift_predictor import predict_week_shifts
 
-predictions, shifts_key = predict_week_shifts(csv_path + 'schedule_by_shift.csv', json_path, 'Sobeys', 'Deli',
-                                              needs_type='median', remove_ratios=False, remove_needs=False)
+# predictions, shifts_key = predict_week_shifts(csv_path + 'schedule_by_shift.csv', json_path, 'Sobeys', 'Deli',
+#                                               needs_type='median', remove_ratios=False, remove_needs=False)
 
 ########################################################################################################################
 
 # from ml_scheduler.create_data.user_predictor.all_avail import test
 
-# test('Sobeys', 'Deli')
-from ml_scheduler.create_data.create_data import get_user_data
+# from ml_scheduler.ml_pipeline.user_predictor import predict_week_users
 
-get_user_data(csv_path + 'schedule_by_shift.csv', json_path, 'Sobeys', 'Deli', shifts_key)
+# predict_week_users(csv_path + 'schedule_by_shift.csv', 'Sobeys', 'Deli', shifts_key)
 
 ########################################################################################################################
 
 # from firesdk.util.dev_utils import generate_demo_data
 # generate_demo_data()
+
+########################################################################################################################
+
+from ml_scheduler.ml_pipeline.cross_ref_segment import test
+
+test(csv_path + 'schedule_by_shift.csv', json_path, 'Sobeys', 'Deli', needs_type='avg', remove_ratios=False,
+     remove_needs=False, classifier_id=None)

@@ -24,7 +24,6 @@
 
 .auto-button {
     position: absolute;
-    left: -12px;
     z-index: 1000000;
 
     height: 30px;
@@ -33,15 +32,13 @@
     border: none;
 
     color: white;
-    font-family: serif;
     background-color: #2c99bd;
 
-    -webkit-transition-duration: 0.2s; /* Safari */
-    transition-duration: 0.2s;
-}
-
-.auto-button:hover {
-    left: 0px;
+    text-align: center;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #modal-demo-done .modal-header {

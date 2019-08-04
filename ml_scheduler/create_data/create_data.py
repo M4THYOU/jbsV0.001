@@ -5,6 +5,7 @@ from firesdk.util.utils import org_names_filter
 
 import pandas as pd
 import json
+import csv
 from datetime import datetime, timedelta
 import pytz
 
@@ -220,10 +221,8 @@ def get_shift_data(path_to_csv, path_to_json_dir, company, department, needs_typ
     company = org_names_filter(company)
     department = org_names_filter(department)
 
-    shift_ratios = create_shift_ratios(path_to_csv, path_to_json_dir)  # this expensive function is called twice in the creation of shift predictor!
+    shift_ratios = create_shift_ratios(path_to_csv, path_to_json_dir)  # called for training the model.
     manual_needs, auto_avg_needs, auto_median_needs = get_needs_methods(path_to_json_dir, company, department)
-
-    print(shift_ratios)
 
     json_schedules = get_json_schedules(path_to_json_dir)
 
@@ -245,8 +244,88 @@ def get_shift_data(path_to_csv, path_to_json_dir, company, department, needs_typ
 # User Predictor
 
 
-def get_user_data(path_to_csv, path_to_json_dir, company, department, shifts_key):
+def create_features_for_single_example_user(shift_ratios, needs, day_of_week, current_max_scale_value, all_possible_shifts):
+    pass
+
+
+def user_predictor_target_spare_vector(shifts_key, actual_shift):
+    """
+    Creates a sparse vector, the target for one instance of the user predictor.
+    :param shifts_key: List of strings representing every possible shift to be had, in specific order.
+    :param actual_shift: String. Specific time string in 24 hour time that matches one element in shifts_key.
+    :return: Sparse list of ints. All zeros, except for one 1, the actual shift the user is working.
+    """
+    sparse_vector = []
+    for shift in shifts_key:
+        if shift == actual_shift:
+            sparse_vector.append(1)
+        else:
+            sparse_vector.append(0)
+
+    return sparse_vector
+
+
+def features_targets_from_user_ratios(path_to_csv, ratio_a, ratio_b, shifts_key):
+    """
+
+    :param path_to_csv: String. Path to csv file of all the shifts.
+    :param ratio_a: First user predictor ratio. Number of shifts user works at x date and y time / number of total
+     shifts they have had on that day of the week.
+    :param ratio_b: Second user predictor ratio. Number of shifts user works at x date and y time / number of total
+     times that same shift occurs on that same day of the week.
+    :param shifts_key: List of strings representing every possible shift to be had, in specific order.
+    :return: Pandas DataFrame of all the data to train the user predictor.
+    """
+    data = {'day_of_week': [], 'user_targets': []}  # then add in all the ratios.
+
+    with open(path_to_csv, 'r', encoding='utf-8-sig') as csv_file:
+        reader = csv.reader(csv_file, delimiter=',')
+
+        next(reader)  # skips header line of the csv.
+        for row in reader:
+            email = row[0]
+            day_of_week = row[1]
+            time_24_hr = row[2]
+            # time_12_hr = row[3]
+            # schedule_file = row[4]
+            # schedule_start_date = row[5]
+            # schedule_end_date = row[6]
+
+            current_ratio_a = ratio_a[day_of_week][email]
+            current_ratio_b = ratio_b[day_of_week][email]
+
+            for index, shift in enumerate(shifts_key):
+                column_title_a = shift + '_ratio_a'
+                column_title_b = shift + '_ratio_b'
+                user_ratio_a = current_ratio_a[index]
+                user_ratio_b = current_ratio_b[index]
+
+                if column_title_a in data:
+                    data[column_title_a].append(user_ratio_a)
+                else:
+                    data[column_title_a] = [user_ratio_a]
+
+                if column_title_b in data:
+                    data[column_title_b].append(user_ratio_b)
+                else:
+                    data[column_title_b] = [user_ratio_b]
+
+            user_target = user_predictor_target_spare_vector(shifts_key, time_24_hr)
+
+            data['day_of_week'].append(day_of_week)
+            data['user_targets'].append(user_target)
+
+    data_df = pd.DataFrame(data)
+
+    return data_df
+
+
+def get_user_data(path_to_csv, company, department, shifts_key):
     company = org_names_filter(company)
     department = org_names_filter(department)
 
-    create_user_ratios(path_to_csv, path_to_json_dir)
+    ratio_a, ratio_b = create_user_ratios(path_to_csv, shifts_key)
+
+    data = features_targets_from_user_ratios(path_to_csv, ratio_a, ratio_b, shifts_key)
+
+    return data

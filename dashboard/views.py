@@ -911,7 +911,7 @@ def user_schedule(request, start_date_string, end_date_string):
     statuses_dict = {}
     if 'reasons' in time_off:
         reasons_dict = time_off['reasons']
-    if 'status' in statuses_dict:
+    if 'statuses' in time_off:
         statuses_dict = time_off['statuses']
 
     current_reasons_dict = {}

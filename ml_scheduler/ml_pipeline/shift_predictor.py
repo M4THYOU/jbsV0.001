@@ -482,7 +482,7 @@ def predict_week_shifts(path_to_csv, path_to_json_dir, company, department, need
                                                                  ratio_cleaner_val=None, random_state=None,
                                                                  remove_ratios=remove_ratios, remove_needs=remove_needs)
 
-    shift_ratios = create_shift_ratios(path_to_csv, path_to_json_dir)
+    shift_ratios = create_shift_ratios(path_to_csv, path_to_json_dir)  # called for predictions.
     manual_needs, auto_avg_needs, auto_median_needs = get_needs_methods(path_to_json_dir, company, department)
 
     if needs_type == 'manual':

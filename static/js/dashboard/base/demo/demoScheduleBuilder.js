@@ -489,8 +489,6 @@ $(function() {
             url: "/hive/ajax/demo/schedule/",
             type: "GET",
             success: function(data) {
-                console.log(data);
-
                 var exactTimes = data['exactTimes'];
                 var positions = data['positions'];
 
@@ -508,6 +506,8 @@ $(function() {
                         }
                     })
                 })
+
+                $('#calendar-loading-indicator').remove();
 
             }
         })
@@ -533,7 +533,7 @@ $(function() {
             var startRowDate = moment(firstOfRowDate, 'YYYY-MM-DD');
             var startOfWeek = moment().startOf('week');
             if (startRowDate >= startOfWeek && !lastOfRowDisabled) {
-                $(this).prepend('<button class="auto-button">AI</button>');
+                $(this).prepend('<button class="auto-button">Auto</button>');
             }
 
         })
@@ -541,6 +541,8 @@ $(function() {
     }
 
     $('.auto-button').on('click', function(e) {
+        $('#calendar-box').append('<div class="overlay" id="calendar-loading-indicator"><i class="fa fa-refresh fa-spin"></i></div>');
+
         var $this = $(this);
 
         var rowContent = $this.siblings('.fc-content-skeleton');
